@@ -28,7 +28,7 @@ class UserController extends Controller
             return $this->success(200,$reuslt);
         }
 
-        return $this->err(400);
+        return $this->err(400,['msg'=> '登录失败']);
 
 
     }
@@ -45,11 +45,11 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-           dd($validator->errors());
+            return $this->err(400,['msg'=> '登录失败']);
         }
         $userId  = UserModel::max('id');
 
-                $user_info = 'user_'.($userId +1).rand(0,1000);
+        $user_info = 'user_'.($userId +1).rand(0,1000);
         $reuslt  = encrypt($user_info);
         UserModel::create([
             'name' => $request->name,
@@ -58,12 +58,7 @@ class UserController extends Controller
             'api_token' => $reuslt,
         ]);
 
-//        Validator::make($data, [
-//            'name' => ['required', 'string', 'max:255'],
-//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-//            'password' => ['required', 'string', 'min:8', 'confirmed'],
-//        ]);
 
-        dd(1);
+        return $this->success(200,$reuslt);
     }
 }
