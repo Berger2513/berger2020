@@ -13,10 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/a', 'IndexController@index');
+
+
+//pc-登录
 Route::post('/login', 'UserController@login');
+//pc-注册
 Route::post('/register', 'UserController@register');
 
+//admin-登录
+Route::post('/admin/login', 'Admin\UserController@login');
+
+Route::prefix('admin')->group(function () {
+
+
+    Route::post('goods/add','Admin\GoodsController@store' );
+});
 
 Route::group(['middleware' => ['auth.api']], function () {
     Route::post('/getUser', function () {
@@ -25,7 +36,3 @@ Route::group(['middleware' => ['auth.api']], function () {
 });
 
 
-//
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
