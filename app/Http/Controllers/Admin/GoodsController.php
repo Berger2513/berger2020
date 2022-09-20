@@ -7,15 +7,13 @@ use App\Http\Controllers\Controller;
 
 class GoodsController extends Controller
 {
-        public function store(Request $request)
+        public function upload(Request $request)
         {
-            $files = $request->file('avatar');
+            $files = $request->file('file');
 
-            foreach ($files as $file) {
-                dd(1);
-            }
-//            $path = $request->file('avatar')->store('avatars','upyun');
+            $path = $request->file('avatar')->store('avatars','upyun');
 
-//            return $path;
+            $pixfix = 'http://bela-goods.test.upcdn.net/';
+            return $pixfix.$path;
         }
 }

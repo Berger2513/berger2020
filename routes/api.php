@@ -27,6 +27,7 @@ Route::prefix('admin')->group(function () {
 
 
     Route::post('goods/add','Admin\GoodsController@store' );
+    Route::post('image/upload','Admin\GoodsController@upload' );
 });
 
 Route::group(['middleware' => ['auth.api']], function () {
