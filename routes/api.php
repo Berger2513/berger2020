@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Events\PodcastProcessed;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,16 +19,36 @@ use Illuminate\Http\Request;
 Route::post('/login', 'UserController@login');
 //pc-注册
 Route::post('/register', 'UserController@register');
+Route::post('/image/del', 'GoodsController@image_del');
+Route::post('/image/add', 'GoodsController@image_add');
 
-//admin-登录
+
+
+
+
+
+
+
+
+
+//admin端接口
 Route::post('/admin/login', 'Admin\UserController@login');
 
 Route::prefix('admin')->group(function () {
 
-
     Route::post('goods/add','Admin\GoodsController@store' );
     Route::post('image/upload','Admin\GoodsController@upload' );
 });
+
+// 测试事件执行
+Route::get('/event_test', function () {
+
+    @PodcastProcessed::dispatch(\App\Models\User::find(1));
+    return 'success~';
+});
+
+
+
 
 Route::group(['middleware' => ['auth.api']], function () {
     Route::post('/getUser', function () {
