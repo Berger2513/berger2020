@@ -24,33 +24,26 @@ Route::post('/image/add', 'GoodsController@image_add');
 
 
 
-
-
-
-
-
-
-
 //admin端接口
 Route::post('/admin/login', 'Admin\UserController@login');
 
-Route::prefix('admin')->group(function () {
+Route::group(['middleware' => ['admin.api']],function () {
 
 
-    Route::post('image/upload','Admin\GoodsController@upload' );
+    Route::post('admin/image/upload','Admin\GoodsController@upload' );
     //    分类管理
-    Route::post('category/store','Admin\CategoryController@store' );
-    Route::post('category/update','Admin\CategoryController@update' );
-    Route::post('category/del','Admin\CategoryController@del' );
-    Route::post('category/list','Admin\CategoryController@list' );
-    Route::post('category/detail','Admin\CategoryController@detail' );
+    Route::post('admin/category/store','Admin\CategoryController@store' );
+    Route::post('admin/category/update','Admin\CategoryController@update' );
+    Route::post('admin/category/del','Admin\CategoryController@del' );
+    Route::post('admin/category/list','Admin\CategoryController@list' );
+    Route::post('admin/category/detail','Admin\CategoryController@detail' );
     //    商品管理
-    Route::post('goods/store','Admin\GoodsController@store' );
-    Route::post('goods/update','Admin\GoodsController@update' );
-    Route::post('goods/del','Admin\GoodsController@del' );
-    Route::post('goods/list','Admin\GoodsController@list' );
-    Route::post('goods/detail','Admin\GoodsController@detail' );
-    Route::post('goods/show_action','Admin\GoodsController@show_action' );
+    Route::post('admin/goods/store','Admin\GoodsController@store' );
+    Route::post('admin/goods/update','Admin\GoodsController@update' );
+    Route::post('admin/goods/del','Admin\GoodsController@del' );
+    Route::post('admin/goods/list','Admin\GoodsController@list' );
+    Route::post('admin/goods/detail','Admin\GoodsController@detail' );
+    Route::post('admin/goods/show_action','Admin\GoodsController@show_action' );
 });
 
 // 测试事件执行

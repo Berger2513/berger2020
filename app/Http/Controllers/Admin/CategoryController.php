@@ -6,8 +6,11 @@ use App\Http\Requests\AdminCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Facades\Cache;
+
 class CategoryController extends Controller
 {
+
     /**
      *  后台分类列表
      * @return array
@@ -65,6 +68,8 @@ class CategoryController extends Controller
     }
     public function detail(Request $request)
     {
+
+
 
         $category = Category::find($request->category_id);
 
