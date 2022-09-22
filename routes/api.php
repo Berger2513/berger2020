@@ -38,6 +38,8 @@ Route::prefix('admin')->group(function () {
 
     Route::post('goods/add','Admin\GoodsController@store' );
     Route::post('image/upload','Admin\GoodsController@upload' );
+    Route::post('category/store','Admin\CategoryController@store' );
+    Route::post('category/list','Admin\CategoryController@list' );
 });
 
 // 测试事件执行
