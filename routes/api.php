@@ -50,6 +50,7 @@ Route::prefix('admin')->group(function () {
     Route::post('goods/del','Admin\GoodsController@del' );
     Route::post('goods/list','Admin\GoodsController@list' );
     Route::post('goods/detail','Admin\GoodsController@detail' );
+    Route::post('goods/show_action','Admin\GoodsController@show_action' );
 });
 
 // 测试事件执行

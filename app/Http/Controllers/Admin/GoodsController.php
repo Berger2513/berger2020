@@ -44,6 +44,8 @@ class GoodsController extends Controller
      */
     public function list()
     {
+
+
         $list = Goods::with('category')->get();
         return $this->success(200,$list);
     }
@@ -115,8 +117,21 @@ class GoodsController extends Controller
 
         $goods = Goods::with('category')->find($request->goods_id);
 
-
-
         return $this->success(200,$goods);
+    }
+
+    /**
+     * 商品详情
+     * @param AdminCategory $request
+     * @return array
+     */
+    public function show_action(Request $request)
+    {
+
+        $goods = Goods::where('goods_id', $request->goods_id)->update(['is_show' => $request->is_show]);
+
+
+
+        return $this->success(200,'');
     }
 }
