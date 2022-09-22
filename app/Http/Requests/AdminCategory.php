@@ -26,6 +26,7 @@ class AdminCategory extends FormRequest
         return [
             'name' => 'required|unique:categorys|max:255',
             'sort' => 'required||max:10',
+            'description' => 'required||max:100',
         ];
     }
 
@@ -37,6 +38,8 @@ class AdminCategory extends FormRequest
             'name.max'=> "最长不能超过255",
             'sort.required'=> "排序必须填写",
             'sort.max'=> "最长不能超过10",
+            'description.required'=> "描述必须填写",
+            'description.max'=> "最长不能超过100",
         ];
     }
 

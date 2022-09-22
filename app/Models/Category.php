@@ -12,7 +12,7 @@ class Category extends Model
     protected $primaryKey = "category_id";
 
     protected $fillable = [
-        'name', 'sort'
+        'name', 'sort', 'description'
     ];
     protected $hidden = [
         'created_at', 'updated_at',

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterUsersAddApiToken extends Migration
+class AlterCategortyDesc extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterUsersAddApiToken extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('api_token', 200)->comment('登录token');
+        Schema::table('categorys', function (Blueprint $table) {
+            $table->string('description', 100)->comment('分类描述');
         });
     }
 

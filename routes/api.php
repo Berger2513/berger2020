@@ -39,6 +39,8 @@ Route::prefix('admin')->group(function () {
     Route::post('goods/add','Admin\GoodsController@store' );
     Route::post('image/upload','Admin\GoodsController@upload' );
     Route::post('category/store','Admin\CategoryController@store' );
+    Route::post('category/update','Admin\CategoryController@update' );
+    Route::post('category/del','Admin\CategoryController@del' );
     Route::post('category/list','Admin\CategoryController@list' );
 });
 
