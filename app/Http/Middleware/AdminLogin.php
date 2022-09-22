@@ -17,8 +17,9 @@ class AdminLogin
     {
 
         $user = Cache::get('admin_user');
+        
 
-        if(is_null($user)){
+        if(is_null($user) || $user != $request->token){
             return response()->json(['code' => 401,'msg' => '请先登录用户']);
         }
 
