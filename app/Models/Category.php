@@ -29,4 +29,5 @@ class Category extends Model
     {
         // TODO: Implement resolveChildRouteBinding() method.
     }
+
 }

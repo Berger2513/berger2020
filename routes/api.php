@@ -36,12 +36,20 @@ Route::post('/admin/login', 'Admin\UserController@login');
 
 Route::prefix('admin')->group(function () {
 
-    Route::post('goods/add','Admin\GoodsController@store' );
+
     Route::post('image/upload','Admin\GoodsController@upload' );
+    //    分类管理
     Route::post('category/store','Admin\CategoryController@store' );
     Route::post('category/update','Admin\CategoryController@update' );
     Route::post('category/del','Admin\CategoryController@del' );
     Route::post('category/list','Admin\CategoryController@list' );
+    Route::post('category/detail','Admin\CategoryController@detail' );
+    //    商品管理
+    Route::post('goods/store','Admin\GoodsController@store' );
+    Route::post('goods/update','Admin\GoodsController@update' );
+    Route::post('goods/del','Admin\GoodsController@del' );
+    Route::post('goods/list','Admin\GoodsController@list' );
+    Route::post('goods/detail','Admin\GoodsController@detail' );
 });
 
 // 测试事件执行

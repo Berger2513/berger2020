@@ -35,7 +35,11 @@ class CategoryController extends Controller
 
         return $this->success(200,'');
     }
-
+    /**
+     * 编辑分类
+     * @param AdminCategory $request
+     * @return array
+     */
     public function update(AdminCategory $request)
     {
 
@@ -59,6 +63,12 @@ class CategoryController extends Controller
 
         return $this->success(200,'');
     }
+    public function detail(Request $request)
+    {
 
+        $category = Category::find($request->category_id);
+
+        return $this->success(200,$category);
+    }
 
 }
