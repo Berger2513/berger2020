@@ -12,7 +12,7 @@ class Category extends Model
     protected $primaryKey = "category_id";
 
     protected $fillable = [
-        'name', 'sort', 'description'
+        'name', 'sort', 'description','is_show'
     ];
     protected $hidden = [
         'created_at', 'updated_at',
@@ -24,7 +24,9 @@ class Category extends Model
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_show' => 'boolean',
     ];
+
     public function resolveChildRouteBinding($childType, $value, $field)
     {
         // TODO: Implement resolveChildRouteBinding() method.

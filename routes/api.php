@@ -40,6 +40,7 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/category/del','Admin\CategoryController@del' );
     Route::post('admin/category/list','Admin\CategoryController@list' );
     Route::post('admin/category/detail','Admin\CategoryController@detail' );
+    Route::post('admin/category/show_action','Admin\CategoryController@show_action' );
     //    商品管理
     Route::post('admin/goods/store','Admin\GoodsController@store' );
     Route::post('admin/goods/update','Admin\GoodsController@update' );

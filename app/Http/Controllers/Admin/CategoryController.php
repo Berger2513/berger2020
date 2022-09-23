@@ -76,5 +76,18 @@ class CategoryController extends Controller
 
         return $this->success(200,$category);
     }
+    /**
+     * 商品详情
+     * @param AdminCategory $request
+     * @return array
+     */
+    public function show_action(Request $request)
+    {
 
+        $category = Category::where('category_id', $request->category_id)->update(['is_show' => $request->is_show]);
+
+
+
+        return $this->success(200,'');
+    }
 }
