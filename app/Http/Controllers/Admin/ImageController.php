@@ -61,14 +61,20 @@ class ImageController extends Controller
     {
         $image = Image::where('url', $request->url)->first();
 
+
+
         try {
             //        初始化又拍云资源
             $disk = Storage::disk('upyun');
             // 删除单条文件
-            $disk->delete($image->url);
+            $disk->delete($request->url);
 
-            $image->delete();
+            if($image) {
 
+                $image->delete();
+            }
+
+            return $this->success(200,'');
 
         } catch (Exception $e) {
             report($e);

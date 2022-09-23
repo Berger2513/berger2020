@@ -29,7 +29,7 @@ Route::post('/admin/login', 'Admin\UserController@login');
 
 Route::group(['middleware' => ['admin.api']],function () {
 
-
+    //    资源管理
     Route::post('admin/image/upload','Admin\ImageController@upload' );
     Route::post('admin/image/add','Admin\ImageController@add' );
     Route::post('admin/image/list','Admin\ImageController@list' );
@@ -47,6 +47,11 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/goods/list','Admin\GoodsController@list' );
     Route::post('admin/goods/detail','Admin\GoodsController@detail' );
     Route::post('admin/goods/show_action','Admin\GoodsController@show_action' );
+    //    专题管理
+    Route::post('admin/topic/add','Admin\TopicController@store' );
+    Route::post('admin/topic/del','Admin\TopicController@del' );
+    Route::post('admin/topic/list','Admin\TopicController@list' );
+    Route::post('admin/topic/update','Admin\TopicController@update' );
 });
 
 // 测试事件执行
