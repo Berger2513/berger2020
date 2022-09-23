@@ -37,7 +37,7 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
 
-        $path = $request->file('file')->store('image','upyun');
+        $path = $request->file('file')->store('file','upyun');
 
         //$pixfix = 'http://bela-goods.test.upcdn.net/';
         return $path;
