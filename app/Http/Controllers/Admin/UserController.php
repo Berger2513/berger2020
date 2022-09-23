@@ -23,7 +23,7 @@ class UserController extends Controller
         $password = 'bela_'.$request->password;
         $token = encrypt($password);
 
-        Cache::put('admin_user', $token, 600);
+        Cache::put('admin_user', $token, 60*60*12);
 
         return $this->success(200,$token);
     }

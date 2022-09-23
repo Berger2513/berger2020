@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use think\Validate;
-class AdminCategory extends FormRequest
+
+class AdminCategoryEdit extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,8 @@ class AdminCategory extends FormRequest
      */
     public function rules()
     {
-
         return [
-            'name' => 'required|unique:categorys',
+            'name' => 'required',
             'sort' => 'required||max:10',
             'description' => 'required||max:100',
         ];
@@ -35,12 +34,10 @@ class AdminCategory extends FormRequest
     {
         return [
             'name.required'=> "名称必须填写",
-            'name.unique'=> "名称必须唯一",
             'sort.required'=> "排序必须填写",
             'sort.max'=> "最长不能超过10",
             'description.required'=> "描述必须填写",
             'description.max'=> "最长不能超过100",
         ];
     }
-
 }

@@ -30,7 +30,10 @@ Route::post('/admin/login', 'Admin\UserController@login');
 Route::group(['middleware' => ['admin.api']],function () {
 
 
-    Route::post('admin/image/upload','Admin\GoodsController@upload' );
+    Route::post('admin/image/upload','Admin\ImageController@upload' );
+    Route::post('admin/image/add','Admin\ImageController@add' );
+    Route::post('admin/image/list','Admin\ImageController@list' );
+    Route::post('admin/image/del','Admin\ImageController@del' );
     //    分类管理
     Route::post('admin/category/store','Admin\CategoryController@store' );
     Route::post('admin/category/update','Admin\CategoryController@update' );

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\AdminCategory;
+use App\Http\Requests\AdminCategoryEdit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -43,7 +44,7 @@ class CategoryController extends Controller
      * @param AdminCategory $request
      * @return array
      */
-    public function update(AdminCategory $request)
+    public function update(AdminCategoryEdit $request)
     {
 
         $category = Category::find($request->category_id);

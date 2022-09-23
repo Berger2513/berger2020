@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\AdminGoods;
+use App\Http\Requests\AdminGoodsEdit;
 use App\Models\Goods;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,7 +77,7 @@ class GoodsController extends Controller
      * @param AdminCategory $request
      * @return array
      */
-    public function update(AdminGoods $request)
+    public function update(AdminGoodsEdit $request)
     {
 
         $goods = Goods::find($request->goods_id);
