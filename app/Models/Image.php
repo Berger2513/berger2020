@@ -7,13 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     protected  $table = "admin_image";
-
+    protected $appends = ['path'];
     protected $primaryKey = "id";
 
     protected $fillable = [
         'name', 'type', 'url'
     ];
     protected $hidden = [
-        'created_at', 'updated_at',
+         'updated_at',
     ];
+
+    public function getPathAttribute()
+    {
+        $url = $this->attributes['url'];
+        $pixfix = 'http://bela-goods.test.upcdn.net/';
+        return  $pixfix.$url;
+    }
+
 }
