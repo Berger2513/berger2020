@@ -22,6 +22,13 @@ class Goods extends Model
         return json_decode($value);
     }
 
+    public function getCoverAttribute($value)
+    {
+
+        $coverList = explode(',',$value);
+        return $coverList;
+    }
+
     protected $casts = [
         'is_show' => 'boolean',
     ];

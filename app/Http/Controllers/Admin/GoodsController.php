@@ -58,14 +58,19 @@ class GoodsController extends Controller
     public function store(AdminGoods $request)
     {
 
+        $arr =  ltrim($request->cover, '[');
+        $arr =  rtrim($arr, ']');
+        $arr = rtrim($arr, ',');
+
         $goods = new Goods();
         $goods->name = $request->name;
         $goods->category_id = $request->category_id;
         $goods->taobao_id = $request->taobao_id;
-        $goods->cover = $request->cover;
+        $goods->cover = $arr;
         $goods->description = $request->description;
         $goods->content = $request->content;
         $goods->options = $request->options;
+        $goods->is_show = 1;
 
 
         $goods->save();

@@ -34,6 +34,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->sort = $request->sort;
         $category->description = $request->description;
+        $category->is_show = 1;
 
         $category->save();
 
