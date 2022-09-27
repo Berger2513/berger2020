@@ -81,12 +81,13 @@ class GoodsController extends Controller
      */
     public function update(AdminGoodsEdit $request)
     {
+        $cover_list = implode(',',$request->cover);
 
         $goods = Goods::find($request->goods_id);
         $goods->name = $request->name;
         $goods->category_id = $request->category_id;
         $goods->taobao_id = $request->taobao_id;
-        $goods->cover = $request->cover;
+        $goods->cover = $cover_list;
         $goods->description = $request->description;
         $goods->content = $request->content;
         $goods->options = $request->options;

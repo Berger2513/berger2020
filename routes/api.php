@@ -53,6 +53,8 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/topic/del','Admin\TopicController@del' );
     Route::post('admin/topic/list','Admin\TopicController@list' );
     Route::post('admin/topic/update','Admin\TopicController@update' );
+    //    活动
+    Route::post('admin/activity/add','Admin\ActivityController@store' );
 });
 
 // 测试事件执行
