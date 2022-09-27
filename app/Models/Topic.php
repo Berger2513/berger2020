@@ -33,7 +33,7 @@ class Topic extends Model
             $temp_goods_arr = [];
             foreach ($goods_temp as $goods)
             {
-                $item = Goods::find($goods)->toArray();
+                $item = Goods::find($goods);
 
                 if($goods){
                     array_push($temp_goods_arr, $item);

@@ -45,9 +45,10 @@ class GoodsController extends Controller
      */
     public function list()
     {
-
-
-        $list = Goods::with('category')->get();
+        $list = Goods::with(['category' => function ($query) {
+            $query->select('category_id','name');
+            }
+        ])->get();
         return $this->success(200,$list);
     }
     /**
@@ -57,10 +58,6 @@ class GoodsController extends Controller
      */
     public function store(AdminGoods $request)
     {
-
-
-
-
         $cover_list = implode(',',$request->cover);
         $goods = new Goods();
         $goods->name = $request->name;
