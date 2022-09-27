@@ -13,6 +13,8 @@ class Goods extends Model
     protected $fillable = [
         'name', 'category_id', 'taobao_id', 'cover', 'content', 'description', 'options', 'view_nums', 'collection_nums','is_show'
     ];
+
+    protected $appends = ["prefix"];
     protected $hidden = [
         'created_at', 'updated_at',
     ];
@@ -21,6 +23,12 @@ class Goods extends Model
     {
         return json_decode($value);
     }
+
+    public function getPrefixAttribute($value)
+    {
+        return "http://bela-goods.test.upcdn.net/";
+    }
+
 
     public function getCoverAttribute($value)
     {
