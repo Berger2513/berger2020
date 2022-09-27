@@ -35,7 +35,10 @@ class ActivityController extends Controller
         $goods = new Activity();
         $goods->name = $request->name;
         $goods->banner = $request->banner;
-        $goods->taobao_id = $request->taobao_id;
+        if($request->taobao_id) {
+            $goods->taobao_id = $request->taobao_id;
+        }
+
         $goods->images = $cover_list;
         $goods->description = $request->description;
         $goods->start_date = $request->start_date;
@@ -72,12 +75,16 @@ class ActivityController extends Controller
         }
         $goods->name = $request->name;
         $goods->banner = $request->banner;
-        $goods->taobao_id = $request->taobao_id;
+//        $goods->taobao_id = $request->taobao_id;
         $goods->images = $cover_list;
         $goods->description = $request->description;
         $goods->start_date = $request->start_date;
         $goods->end_date = $request->end_date;
-        $goods->status = 1;
+
+        if($request->taobao_id) {
+            $goods->taobao_id = $request->taobao_id;
+        }
+
         $goods->save();
         return $this->success(200, '');
     }
