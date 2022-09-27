@@ -31,7 +31,7 @@ class AdminActivity extends FormRequest
             'banner' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'goods_id' => 'required',
+            'taobao_id' => 'required',
             'images' => 'required',
             'description' => 'required',
         ];
@@ -45,7 +45,7 @@ class AdminActivity extends FormRequest
             'start_date.required' => "开始时间必须填写",
             'end_date.required' => "结束时间时间必须填写",
             'banner.required' => "banner必须填写",
-            'goods_id.required' => "goods_id必须填写",
+            'taobao_id.required' => "goods_id必须填写",
             'images.required' => "图片必须填写",
             'description.required' => "描述必须填写",
         ];
