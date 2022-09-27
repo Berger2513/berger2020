@@ -82,4 +82,20 @@ class TopicController extends Controller
         return $this->success(200,'删除成功');
 
     }
+
+    /**
+     * 商品详情
+     * @param AdminCategory $request
+     * @return array
+     */
+    public function detail(Request $request)
+    {
+
+        $topic = Topic::find($request->id);
+
+        if(!$topic) {
+            return $this->err(500, "数据有错");
+        }
+        return $this->success(200,$topic);
+    }
 }

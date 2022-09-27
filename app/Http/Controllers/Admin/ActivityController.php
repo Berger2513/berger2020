@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class ActivityController extends Controller
 {
 
-    
+
     public function store(AdminActivity $request)
     {
         $cover_list = implode(',',$request->images);
