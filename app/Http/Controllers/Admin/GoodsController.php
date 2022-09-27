@@ -62,7 +62,7 @@ class GoodsController extends Controller
         $goods->name = $request->name;
         $goods->category_id = $request->category_id;
         $goods->taobao_id = $request->taobao_id;
-        $goods->cover = $arr;
+        $goods->cover = $request->cover;
         $goods->description = $request->description;
         $goods->content = $request->content;
         $goods->options = $request->options;
