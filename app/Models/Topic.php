@@ -25,10 +25,8 @@ class Topic extends Model
     public function getModulesAttribute($value)
     {
         $arr = json_decode($value);
-        
 
         return $arr;
-
 
     }
 

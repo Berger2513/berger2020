@@ -12,18 +12,34 @@ class UserController extends Controller
     public function login(Request $request)
     {
 
-        if($request->user != 'root'){
-             return $this->err(400,['msg'=> '账号错误']);
+        if(!in_array($request->user,["root","admin","bela_tempo"])){
+            return $this->err(400,['msg'=> '账号错误']);
         }
+
 
         if($request->password != 'root'){
             return $this->err(400,['msg'=> '密码错误']);
         }
 
-        $password = 'bela_'.$request->password;
-        $token = encrypt($password);
+        if($request->user == 'root'){
+            $password = 'bela_root_'.$request->password;
+            $token = encrypt($password);
 
-        Cache::put('admin_user', $token, 60*60*12);
+            Cache::put('admin_root', $token, 60*60*12);
+        }
+        if($request->user == 'admin'){
+            $password = 'bela_admin_'.$request->password;
+            $token = encrypt($password);
+
+            Cache::put('admin_admin', $token, 60*60*12);
+        }
+        if($request->user == 'bela_tempo'){
+            $password = 'bela_bela_tempo_'.$request->password;
+            $token = encrypt($password);
+
+            Cache::put('admin_bela_tempo', $token, 60*60*12);
+        }
+
 
         return $this->success(200,$token);
     }

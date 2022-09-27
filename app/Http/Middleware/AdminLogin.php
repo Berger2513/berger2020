@@ -16,12 +16,19 @@ class AdminLogin
     public function handle($request, Closure $next)
     {
 
-        $user = Cache::get('admin_user');
+        $user_root = Cache::get('admin_root');
+        $user_admin = Cache::get('admin_admin');
+        $user_bela = Cache::get('admin_bela_tempo');
 
-
-        if(is_null($user) || $user != $request->token){
+        if(!$request->token) {
             return response()->json(['code' => 401,'msg' => '请先登录用户']);
         }
+
+        if(!in_array($request->token,[$user_root,$user_admin,$user_bela])){
+            return response()->json(['code' => 401,'msg' => '请先登录用户']);
+        }
+
+
 
         return $next($request);
     }
