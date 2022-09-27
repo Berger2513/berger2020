@@ -25,27 +25,7 @@ class Topic extends Model
     public function getModulesAttribute($value)
     {
         $arr = json_decode($value);
-
-
-        foreach ($arr as $key=> $val){
-            $goods_temp = explode(',', $val->goods_id);
-
-            $temp_goods_arr = [];
-            foreach ($goods_temp as $goods)
-            {
-                $item = Goods::find($goods);
-
-                if($goods){
-                    array_push($temp_goods_arr, $item);
-                } else {
-                    continue;
-                }
-
-            }
-
-            $arr[$key]->goods_list = $temp_goods_arr;
-        }
-
+        
 
         return $arr;
 
