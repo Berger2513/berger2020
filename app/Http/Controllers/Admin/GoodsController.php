@@ -48,7 +48,7 @@ class GoodsController extends Controller
         $list = Goods::with(['category' => function ($query) {
             $query->select('category_id','name');
             }
-        ])->get();
+        ])->paginate(15);
         return $this->success(200,$list);
     }
     /**
