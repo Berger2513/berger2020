@@ -14,7 +14,7 @@ class Activity extends Model
 
     protected  $appends  = ['prefix'];
     protected $fillable = [
-        'banner', 'name', 'taobao_id', 'images', 'start_date', 'end_date', 'description', 'status',
+        'banner', 'name', 'taobao_id', 'images', 'start_date', 'end_date', 'description', 'status','is_open'
     ];
     protected $hidden = [
         'created_at', 'updated_at',

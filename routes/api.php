@@ -60,6 +60,7 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/activity/del','Admin\ActivityController@del' );
     Route::post('admin/activity/list','Admin\ActivityController@list' );
     Route::post('admin/activity/detail','Admin\ActivityController@detail' );
+    Route::post('admin/activity/open_job','Admin\ActivityController@open_job' );
 });
 
 // 测试事件执行

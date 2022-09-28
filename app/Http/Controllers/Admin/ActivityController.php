@@ -46,22 +46,8 @@ class ActivityController extends Controller
         $goods->end_date = $request->end_date;
         $goods->status = 1;
 
-        $create_time = Carbon::create($request->start_date)->timestamp;
-        $end_time = Carbon::create($request->end_date)->timestamp;
-        $now_time    = Carbon::now()->timestamp;
-        $delay_time  = $create_time - $now_time;
-        $end_delay_time  = $end_time - $now_time;
-        if($delay_time<0){
-            $delay_time = 10;
-        }
-
-        if($end_delay_time<0){
-            $end_delay_time = 60;
-        }
-
         $goods->save();
-        StartActivityJob::dispatch($goods)->delay($delay_time);
-        EndActivityJob::dispatch($goods)->delay($end_delay_time);
+
 
 
         return $this->success(200, '');
@@ -125,5 +111,34 @@ class ActivityController extends Controller
             return $this->err(500, "数据有错");
         }
         return $this->success(200,$activity);
+    }
+
+
+    public function open_job(Request $request)
+    {
+        $activity = Activity::find($request->id);
+        if (!$activity) {
+            return $this->err(500, "数据有错");
+        }
+
+
+        $create_time = Carbon::create($activity->start_date)->timestamp;
+        $end_time = Carbon::create($activity->end_date)->timestamp;
+        $now_time    = Carbon::now()->timestamp;
+        $delay_time  = $create_time - $now_time;
+        $end_delay_time  = $end_time - $now_time;
+        if($delay_time<0){
+            $delay_time = 10;
+        }
+
+        if($end_delay_time<0){
+            $end_delay_time = 60;
+        }
+
+
+        StartActivityJob::dispatch($activity)->delay($delay_time);
+        EndActivityJob::dispatch($activity)->delay($end_delay_time);
+        return $this->success(200,'');
+
     }
 }
