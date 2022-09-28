@@ -20,6 +20,11 @@ class Activity extends Model
         'created_at', 'updated_at',
     ];
 
+    protected $casts = [
+        'is_open' => 'boolean',
+    ];
+
+
     public function getPrefixAttribute($value)
     {
         return "http://bela-goods.test.upcdn.net/";

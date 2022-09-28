@@ -139,7 +139,7 @@ class ActivityController extends Controller
         StartActivityJob::dispatch($activity)->delay($delay_time);
         EndActivityJob::dispatch($activity)->delay($end_delay_time);
 
-        $activity->update(['is_open' => 2]);
+        $activity->update(['is_open' => 1]);
 
         return $this->success(200,'');
 
