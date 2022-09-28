@@ -36,8 +36,15 @@ class ImageController extends Controller
      */
     public function upload(Request $request)
     {
+        $rand_int = rand();
+        $md5_rand_int = md5($rand_int);
+        $rand_extension = rand(0,9999);
+        $file_extension = $request->file('file')->getClientOriginalExtension();
 
-        $path = $request->file('file')->store('file','upyun');
+//        $path = $request->file('file')->store('file','upyun');
+        $path = $request->file('file')->storeAs(
+            'file', $md5_rand_int.$rand_extension.".".$file_extension,'upyun'
+        );
 
         //$pixfix = 'http://bela-goods.test.upcdn.net/';
         return $path;
