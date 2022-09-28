@@ -26,7 +26,7 @@ class ActivityController extends Controller
         if ($request->filled('status')) {
             $where[] = ['status','=',$request['status']];
         }
-        $list = Activity::where($where)->paginate($request->page_size);
+        $list = Activity::where($where)->paginate(15);
         return $this->success(200,$list);
     }
     //        创建活动
