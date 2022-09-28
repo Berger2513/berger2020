@@ -28,7 +28,7 @@ class ActivityController extends Controller
         $list = Activity::where($where)->paginate(15);
         return $this->success(200,$list);
     }
-
+    //        创建活动
     public function store(AdminActivity $request)
     {
         $cover_list = implode(',', $request->images);
@@ -46,14 +46,21 @@ class ActivityController extends Controller
         $goods->status = 1;
 
         $create_time = Carbon::create($request->start_date)->timestamp;
+        $end_time = Carbon::create($request->end_date)->timestamp;
         $now_time    = Carbon::now()->timestamp;
         $delay_time  = $create_time - $now_time;
+        $end_delay_time  = $end_time - $now_time;
         if($delay_time<0){
             $delay_time = 10;
         }
 
+        if($end_delay_time<0){
+            $end_delay_time = 60;
+        }
+
         $goods->save();
         StartActivityJob::dispatch($goods)->delay($delay_time);
+        EndActivityJob::dispatch($goods)->delay($end_delay_time);
 
 
         return $this->success(200, '');
