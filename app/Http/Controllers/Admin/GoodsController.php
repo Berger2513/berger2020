@@ -43,9 +43,18 @@ class GoodsController extends Controller
      *  后台商品列表
      * @return array
      */
-    public function list()
+    public function list(Request $request)
     {
-        $list = Goods::with(['category' => function ($query) {
+        $where = [];
+        if ($request->filled('goods_id')) {
+            $where[] = ['goods_id',$request->goods_id];
+        }
+        if ($request->filled('category_id')) {
+            $where[] = ['category_id','=',$request['category_id']];
+        }
+
+        
+        $list = Goods::where($where)->with(['category' => function ($query) {
             $query->select('category_id','name');
             }
         ])->paginate(15);
