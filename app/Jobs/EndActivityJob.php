@@ -12,7 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 class EndActivityJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+    protected $activity;
     /**
      * Create a new job instance.
      *
