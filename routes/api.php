@@ -61,6 +61,11 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/activity/list','Admin\ActivityController@list' );
     Route::post('admin/activity/detail','Admin\ActivityController@detail' );
     Route::post('admin/activity/open_job','Admin\ActivityController@open_job' );
+    //    页面配置
+    Route::post('admin/page/update','Admin\PageController@update' );
+    Route::post('admin/page/detail','Admin\PageController@detail' );
+    Route::post('admin/page/banner_detail','Admin\PageController@banner_detail' );
+    Route::post('admin/page/banner_update','Admin\PageController@banner_update' );
 });
 
 // 测试事件执行

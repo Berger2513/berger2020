@@ -53,7 +53,7 @@ class GoodsController extends Controller
             $where[] = ['category_id','=',$request['category_id']];
         }
 
-        
+
         $list = Goods::where($where)->with(['category' => function ($query) {
             $query->select('category_id','name');
             }
