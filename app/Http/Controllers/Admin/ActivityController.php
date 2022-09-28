@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Jobs\StartActivityJob;
+use App\Jobs\EndActivityJob;
 class ActivityController extends Controller
 {
     /**
