@@ -71,7 +71,7 @@ class HomeController extends Controller
         foreach ($goods_modules as $key => $value)
         {
             $temp_goods = [];
-            $temp_goods = Goods::find($value->id);
+            $temp_goods = Goods::find($value->goods_id);
             if(empty($temp_goods)){
                 $goods_modules[$key]->goods_info = [];
                 continue;
