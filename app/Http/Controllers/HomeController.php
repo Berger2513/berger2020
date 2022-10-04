@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\Category;
 use App\Models\Goods;
 use App\Models\Page;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -72,7 +73,7 @@ class HomeController extends Controller
         foreach ($topic_modules as $key => $value)
         {
             $temp_topic = [];
-            $temp_topic = Goods::find($value->id);
+            $temp_topic = Topic::find($value->id);
             if(empty($temp_topic)){
                 $topic_modules[$key]->name = '';
                 continue;
