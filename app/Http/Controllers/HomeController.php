@@ -53,33 +53,31 @@ class HomeController extends Controller
 
         }
 
-        foreach ($category_list  as $key => $value)
+        foreach ($topic_modules  as $key => $value)
         {
-            $temp_category = [];
+            $temp_topic = [];
 
-            $temp_category = Category::find($value->id);
-            if(empty($temp_category)){
-                $category_list[$key]->category_name = "";
-                $category_list[$key]->description = "";
+            $temp_topic = Topic::find($value->id);
+            if(empty($temp_topic)){
+                $topic_modules[$key]->topic_name = "";
                 continue;
             }
 
-            $category_list[$key]->category_name = $temp_category->name;
-            $category_list[$key]->category_description = $temp_category->description;
+            $topic_modules[$key]->topic_name = $temp_topic->name;
 
         }
 
 
-        foreach ($topic_modules as $key => $value)
+        foreach ($goods_modules as $key => $value)
         {
-            $temp_topic = [];
-            $temp_topic = Topic::find($value->id);
-            if(empty($temp_topic)){
-                $topic_modules[$key]->name = '';
+            $temp_goods = [];
+            $temp_goods = Goods::find($value->id);
+            if(empty($temp_goods)){
+                $goods_modules[$key]->goods_info = [];
                 continue;
             }
 
-            $topic_modules[$key]->name = $temp_topic->name;
+            $goods_modules[$key]->goods_info = $temp_goods;
 
         }
 
