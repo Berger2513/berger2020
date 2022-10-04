@@ -23,6 +23,7 @@ Route::post('/image/del', 'GoodsController@image_del');
 Route::post('/image/add', 'GoodsController@image_add');
 Route::post('/home/index', 'HomeController@index');
 Route::post('/home/category', 'HomeController@category');
+Route::post('/home/activity', 'HomeController@activity');
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
@@ -12,7 +13,7 @@ class Activity extends Model
 
 
 
-    protected  $appends  = ['prefix'];
+    protected  $appends  = ['prefix','end_time'];
     protected $fillable = [
         'banner', 'name', 'taobao_id', 'images', 'start_date', 'end_date', 'description', 'status','is_open'
     ];
@@ -37,6 +38,15 @@ class Activity extends Model
         $coverList = explode(',',$value);
         return $coverList;
     }
+    public function getEndTimeAttribute($value)
+    {
+        $end_time = Carbon::create($this->end_date)->timestamp;
+        $now_time = Carbon::now()->timestamp;
 
+        if($this->status == 2) {
+
+            return $end_time - $now_time;
+        }
+    }
 
 }
