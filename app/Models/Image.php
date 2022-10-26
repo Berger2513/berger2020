@@ -20,7 +20,7 @@ class Image extends Model
     public function getPathAttribute()
     {
         $url = $this->attributes['url'];
-        $pixfix = 'http://bela-goods.test.upcdn.net/';
+        $pixfix = 'http://file.bela-tempo.com/';
         return  $pixfix.$url;
     }
 

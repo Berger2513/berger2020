@@ -26,7 +26,7 @@ class Goods extends Model
 
     public function getPrefixAttribute($value)
     {
-        return "http://bela-goods.test.upcdn.net/";
+        return "http://file.bela-tempo.com/";
     }
 
 
