@@ -24,6 +24,11 @@ Route::post('/image/add', 'GoodsController@image_add');
 Route::post('/home/index', 'HomeController@index');
 Route::post('/home/category', 'HomeController@category');
 Route::post('/home/activity', 'HomeController@activity');
+Route::post('/card/bind', 'HomeController@bind');
+Route::post('/card/card_add', 'HomeController@card_add');
+Route::post('/card/card_detail', 'HomeController@card_detail');
+
+
 
 
 
@@ -69,6 +74,8 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/page/detail','Admin\PageController@detail' );
     Route::post('admin/page/banner_detail','Admin\PageController@banner_detail' );
     Route::post('admin/page/banner_update','Admin\PageController@banner_update' );
+
+
 });
 
 // 测试事件执行

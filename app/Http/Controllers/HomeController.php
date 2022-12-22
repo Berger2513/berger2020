@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Card;
+use App\Models\CardResource;
 use App\Models\Category;
 use App\Models\Goods;
 use App\Models\Page;
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 
 class HomeController extends Controller
 {
@@ -116,5 +119,69 @@ class HomeController extends Controller
         ];
 
         return $this->success(200, $res);
+    }
+
+
+    public function bind(Request $request)
+    {
+
+
+        $findExist =  Card::whereUid($request->uid)->first();
+
+        if($findExist)
+            return $this->err(505, 'uid已经绑定成功');
+
+        $card = new Card();
+        $card->uid = $request->uid;
+        $card->code = $request->code;
+
+
+        $card->save();
+
+        return $this->success(200, '');
+
+    }
+
+    public function card_add(Request $request)
+    {
+//判断用户合法性
+        $card = Card::whereUid($request->uid)->first();
+
+
+        if($card->code  != $request->code)
+            return $this->err(505, '验证码不匹配');
+        $findExist =  CardResource::whereUid($request->uid)->first();
+        if($findExist){
+            //更新
+            if(! $request->resource) {
+                return $this->success(200, '');
+            } else {
+                $findExist->resource =  $request->resource;
+                $findExist->save();
+                return $this->success(200, '');
+            }
+
+        } else {
+            //新增
+            $CardResource = new CardResource();
+            $CardResource->uid = $request->uid;
+            $CardResource->code = $request->code;
+            $CardResource->resource = $request->resource;
+
+            $CardResource->save();
+            return $this->success(200, '');
+        }
+
+
+    }
+    public function card_detail(Request $request)
+    {
+        $findExist =  CardResource::whereUid($request->uid)->first();
+
+        if($findExist){
+            return $this->success(200, $findExist);
+        } else {
+            return $this->err(505, '该卡片没有激活');
+        }
     }
 }
