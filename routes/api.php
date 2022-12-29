@@ -27,6 +27,8 @@ Route::post('/home/activity', 'HomeController@activity');
 Route::post('/card/bind', 'HomeController@bind');
 Route::post('/card/card_add', 'HomeController@card_add');
 Route::post('/card/card_detail', 'HomeController@card_detail');
+Route::post('/card/identity', 'HomeController@card_identity');
+Route::post('/card/identity_read', 'HomeController@card_identity_read');
 
 
 

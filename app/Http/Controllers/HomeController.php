@@ -11,6 +11,7 @@ use App\Models\Page;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Mockery\Exception;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -184,4 +185,20 @@ class HomeController extends Controller
             return $this->err(505, '该卡片没有激活');
         }
     }
+    public function card_identity(Request $request)
+    {
+        $uid = $request->uid ;
+
+        Cache::put('nfc_uid', $uid, 60*60*12);
+
+        return $this->success(200, '');
+    }
+
+    public function card_identity_read()
+    {
+        $uid = Cache::get('nfc_uid');;
+
+        return $this->success(200, $uid);
+    }
+
 }
