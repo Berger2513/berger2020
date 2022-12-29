@@ -144,7 +144,7 @@ class HomeController extends Controller
 
     public function card_add(Request $request)
     {
-//判断用户合法性
+        //判断用户合法性
         $card = Card::whereUid($request->uid)->first();
 
 
