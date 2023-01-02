@@ -37,6 +37,10 @@ Route::post('/card/identity_read', 'HomeController@card_identity_read');
 //admin端接口
 Route::post('/admin/login', 'Admin\UserController@login');
 
+Route::post('admin/nfc/add','Admin\NfcController@add' );
+
+Route::post('admin/nfc/detail','Admin\NfcController@detail' );
+
 Route::group(['middleware' => ['admin.api']],function () {
 
     //    资源管理
@@ -77,10 +81,10 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/page/banner_detail','Admin\PageController@banner_detail' );
     Route::post('admin/page/banner_update','Admin\PageController@banner_update' );
     //    nfc
-    Route::post('admin/nfc/add','Admin\NfcController@add' );
+
     Route::post('admin/nfc/wirte_resource','Admin\NfcController@wirte_resource' );
     Route::post('admin/nfc/list','Admin\NfcController@list' );
-    Route::post('admin/nfc/detail','Admin\NfcController@detail' );
+
 
 });
 

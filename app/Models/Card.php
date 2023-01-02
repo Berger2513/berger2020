@@ -12,7 +12,7 @@ class Card extends Model
     protected $primaryKey = "id";
 
     protected $fillable = [
-        'uid', 'code',
+        'uid', 'code',  'user_id', 'mark', 'url'
     ];
     protected $hidden = [
         'created_at', 'updated_at',
