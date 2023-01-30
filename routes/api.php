@@ -31,7 +31,9 @@ Route::post('/card/identity', 'HomeController@card_identity');
 Route::post('/card/identity_read', 'HomeController@card_identity_read');
 
 
-
+//微信回调
+Route::get('/common/weixin_callback', 'CommonController@weixin_callback');
+Route::get('/common/weixin', 'CommonController@weixin');
 
 
 //admin端接口
@@ -94,7 +96,6 @@ Route::get('/event_test', function () {
     @PodcastProcessed::dispatch(\App\Models\User::find(1));
     return 'success~';
 });
-
 
 
 

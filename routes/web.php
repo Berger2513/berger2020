@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+Route::get('/common/weixin_callback', 'CommonController@weixin_callback');
+Route::get('/common/weixin', 'CommonController@weixin');
 
 

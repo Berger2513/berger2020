@@ -176,7 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         JellyBool\Flysystem\Upyun\UpyunServiceProvider::class,
-
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        \SocialiteProviders\Manager\ServiceProvider::class,
     ],
 
     /*
@@ -227,7 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+//        berger
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
