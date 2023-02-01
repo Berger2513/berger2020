@@ -65,7 +65,7 @@ dd($url1);
     {
 
         $user = Socialite::driver('weixin')->user();
-        echo "小倩同学，下午好呀!";
+
         dd($user);
         $check = User::where('uid', $user->id)->where('provider', 'qq_connect')->first();
         if (!$check) {
