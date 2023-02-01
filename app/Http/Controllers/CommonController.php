@@ -85,7 +85,7 @@ dd($url1);
 
         $res1 = json_decode($result);
 
-        dd($res1->access_token);
+        dd($res1);
         dd($url);
 
 
