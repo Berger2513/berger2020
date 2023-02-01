@@ -29,18 +29,19 @@ class CommonController extends Controller
 
         $APPID = "wx12669591d44f3bc7";
         $APPSECRET = "8d411f1c83e083018730a39c873a4017";
-        $REDIRECT_URI = urlEncode("http://api.bela-tempo.com/common/weixin_callback");
+        $REDIRECT_URI = urlEncode("https://api.bela-tempo.com/common/weixin_callback");
 //        $REDIRECT_URI = urlEncode("http://laravel.test/common/weixin_callback");
         $state = "Bela_Temp".rand(10000,9999);
 
 
-        $url1 ="https://open.weixin.qq.com/connect/qrconnect?appid=".$APPID."&redirect_uri=".$REDIRECT_URI."&response_type=code&scope=snsapi_login&state=".$state."#wechat_redirect";
 
+        $url1 ="https://open.weixin.qq.com/connect/qrconnect?appid=".$APPID."&redirect_uri=".$REDIRECT_URI."&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
 
-        dd($url1);
+dd($url1);
+
 
 //        $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$APPID."&redirect_uri=".$REDIRECT_URI."&response_type=code&scope=snsapi_login&state=".$state."#wechat_redirect";
-        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$APPID."&secret=".$APPSECRET;
+//        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$APPID."&secret=".$APPSECRET;
 // Initialize a CURL session.
         $ch = curl_init();
 
@@ -62,9 +63,10 @@ class CommonController extends Controller
 
     public function  weixin_callback()
     {
-        dd(1);
-        $user = Socialite::driver('weixin')->user();
 
+        $user = Socialite::driver('weixin')->user();
+        echo "小倩同学，下午好呀!";
+        dd($user);
         $check = User::where('uid', $user->id)->where('provider', 'qq_connect')->first();
         if (!$check) {
             $customer = User::create([
@@ -86,8 +88,7 @@ class CommonController extends Controller
     public function weixin(Request $request)
     {
         $this->getAccessToken();
-
         return Socialite::with('weixin')->redirect();
-        return Socialite::with('weixin')->redirect();
+//        return Socialite::with('weixin')->redirect();
     }
 }
