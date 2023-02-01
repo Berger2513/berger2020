@@ -73,7 +73,17 @@ dd($url1);
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$APPID."&secret=".$APPSECRET."&code=".$code."&grant_type=authorization_code";
 
 
-        
+        $ch = curl_init();
+
+// Return Page contents.
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+//grab URL and pass it to the variable.
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        $result = curl_exec($ch);
+
+        dd($result);
         dd($url);
 
 
