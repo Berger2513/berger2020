@@ -61,8 +61,22 @@ dd($url1);
 
 
 
-    public function  weixin_callback()
+    public function  weixin_callback(Request $request)
     {
+
+
+        $APPID = "wx12669591d44f3bc7";
+        $APPSECRET = "8d411f1c83e083018730a39c873a4017";
+
+        $code = $request->code;
+
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$APPID."&secret=".$APPSECRET."&code=".$code."&grant_type=authorization_code";
+
+
+        
+        dd($url);
+
+
 
         $user = Socialite::driver('weixin')->user();
 
