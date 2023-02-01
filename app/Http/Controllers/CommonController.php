@@ -84,8 +84,15 @@ dd($url1);
         $result = curl_exec($ch);
 
         $res1 = json_decode($result);
+        $access_token = $res1->access_token;
+        $openid = $res1->openid;
 
-        dd($res1);
+
+        $url2 = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid;
+
+        $user = $this->get_curl_info($url2);
+
+        dd($user);
         dd($url);
 
 
@@ -119,5 +126,23 @@ dd($url1);
         $this->getAccessToken();
         return Socialite::with('weixin')->redirect();
 //        return Socialite::with('weixin')->redirect();
+    }
+
+
+    protected   function get_curl_info($url)
+    {
+        $ch = curl_init();
+
+// Return Page contents.
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+//grab URL and pass it to the variable.
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        $result = curl_exec($ch);
+
+        $res1 = json_decode($result);
+
+        return $res1;
     }
 }
