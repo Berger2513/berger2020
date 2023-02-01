@@ -92,6 +92,8 @@ dd($url1);
 
         $user = $this->get_curl_info($url2);
 
+        echo "<src img='".$user->headimgurl."'></src>";
+        echo "小倩同学 下午好哇";
         dd($user);
         dd($url);
 
