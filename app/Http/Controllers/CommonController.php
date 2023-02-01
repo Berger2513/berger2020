@@ -83,7 +83,9 @@ dd($url1);
 
         $result = curl_exec($ch);
 
-        dd($result);
+        $res1 = json_decode($result);
+
+        dd($res1->access_token);
         dd($url);
 
 
@@ -111,6 +113,9 @@ dd($url1);
 
     public function weixin(Request $request)
     {
+
+
+
         $this->getAccessToken();
         return Socialite::with('weixin')->redirect();
 //        return Socialite::with('weixin')->redirect();
