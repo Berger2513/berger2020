@@ -23,3 +23,4 @@ Route::get('common/weixin_callback', 'CommonController@weixin_callback');
 Route::get('common/weixin', 'CommonController@weixin');
 
 
+

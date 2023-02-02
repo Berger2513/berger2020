@@ -8,9 +8,9 @@ use Laravel\Socialite\Facades\Socialite;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Models\User;
 class CommonController extends Controller
 {
-
 
     protected  $accessToken;
 
@@ -23,10 +23,6 @@ class CommonController extends Controller
 
     public function getAccessToken()
     {
-
-
-        $url = "https://www.baidu.com/";
-
         $APPID = "wx12669591d44f3bc7";
         $APPSECRET = "8d411f1c83e083018730a39c873a4017";
         $REDIRECT_URI = urlEncode("https://api.bela-tempo.com/common/weixin_callback");
@@ -40,15 +36,15 @@ class CommonController extends Controller
 dd($url1);
 
 
-//        $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$APPID."&redirect_uri=".$REDIRECT_URI."&response_type=code&scope=snsapi_login&state=".$state."#wechat_redirect";
-//        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$APPID."&secret=".$APPSECRET;
-// Initialize a CURL session.
+        //        $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$APPID."&redirect_uri=".$REDIRECT_URI."&response_type=code&scope=snsapi_login&state=".$state."#wechat_redirect";
+        //        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$APPID."&secret=".$APPSECRET;
+        // Initialize a CURL session.
         $ch = curl_init();
 
-// Return Page contents.
+        // Return Page contents.
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-//grab URL and pass it to the variable.
+        //grab URL and pass it to the variable.
         curl_setopt($ch, CURLOPT_URL, $url1);
 
         $result = curl_exec($ch);
@@ -63,22 +59,18 @@ dd($url1);
 
     public function  weixin_callback(Request $request)
     {
-
-
         $APPID = "wx12669591d44f3bc7";
         $APPSECRET = "8d411f1c83e083018730a39c873a4017";
 
         $code = $request->code;
-
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$APPID."&secret=".$APPSECRET."&code=".$code."&grant_type=authorization_code";
-
 
         $ch = curl_init();
 
-// Return Page contents.
+        // Return Page contents.
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-//grab URL and pass it to the variable.
+        //grab URL and pass it to the variable.
         curl_setopt($ch, CURLOPT_URL, $url);
 
         $result = curl_exec($ch);
@@ -90,55 +82,70 @@ dd($url1);
 
         $url2 = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid;
 
-        $user = $this->get_curl_info($url2);
-
-        echo "<img src='".$user->headimgurl."'></img>";
-        echo "小倩同学 下午好哇";
-        dd($user);
-        dd($url);
+        $weixin_user = $this->get_curl_info($url2);
 
 
+        $openid = $weixin_user->openid;
 
-        $user = Socialite::driver('weixin')->user();
-
-        dd($user);
-        $check = User::where('uid', $user->id)->where('provider', 'qq_connect')->first();
+        $api_token = bcrypt($openid.rand(1000,9999));
+        $check = User::where('openid', $openid)->first();
         if (!$check) {
             $customer = User::create([
-                'uid' => $user->id,
-                'provider' => 'qq_connect',
-                'name' => $user->nickname,
-                'email' => 'qq_connect+' . $user->id . '@example.com',
-                'password' => bcrypt(Str::random(60)),
-                'avatar' => $user->avatar
+                'name' => $weixin_user->nickname,
+                'password' => $weixin_user->nickname,
+                'email' => '',
+                'openid' => $openid,
+                'sex' => $weixin_user->sex,
+                'headimgurl' => $weixin_user->headimgurl,
+                'unionid' => $weixin_user->unionid,
+                'api_token'=> $api_token
             ]);
         } else {
             $customer = $check;
         }
 
         Auth::login($customer, true);
-        return redirect('/');
+
+        return $this->success(200, ['token' => $check->api_token]);
+
+
     }
 
     public function weixin(Request $request)
     {
 
+        $APPID = "wx12669591d44f3bc7";
+        $REDIRECT_URI = urlEncode("https://api.bela-tempo.com/common/weixin_callback");
 
+        $url ="https://open.weixin.qq.com/connect/qrconnect?appid=".$APPID."&redirect_uri=".$REDIRECT_URI."&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
 
-        $this->getAccessToken();
-        return Socialite::with('weixin')->redirect();
-//        return Socialite::with('weixin')->redirect();
+        $data = [
+            'code_url'=>  $url
+        ];
+        return $this->success(200, $data);
     }
+
+    public function get_user_by_token(Request $request)
+    {
+        
+        $check = User::where('api_token', $request->token)->first();
+        if (!$check) {
+            $check = [];
+        }
+
+        return $this->success(200, $check);
+    }
+
 
 
     protected   function get_curl_info($url)
     {
         $ch = curl_init();
 
-// Return Page contents.
+        // Return Page contents.
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-//grab URL and pass it to the variable.
+        //grab URL and pass it to the variable.
         curl_setopt($ch, CURLOPT_URL, $url);
 
         $result = curl_exec($ch);
