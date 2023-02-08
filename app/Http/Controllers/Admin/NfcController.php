@@ -83,12 +83,20 @@ class NfcController extends Controller
 
     public function card_vfx_add(Request $request)
     {
-        $vfx = new Card_vfx();
-        $vfx->name =  $request->name;
-        $vfx->url =  $request->url;
+
+        if(empty($request->id)) {
+
+            $vfx = new Card_vfx();
+            $vfx->name =  $request->name;
+            $vfx->url =  $request->url;
+
+        } else {
+            $vfx =   Card_vfx::find($request->id);
+            $vfx->name =  $request->name;
+            $vfx->url =  $request->url;
+        }
+
         $vfx->save();
-
-
 
         return $this->success(200, '');
     }
@@ -109,10 +117,7 @@ class NfcController extends Controller
     public function card_vfx_edit(Request $request)
     {
 
-        $vfx =   Card_vfx::find($request->id);
-        $vfx->name =  $request->name;
-        $vfx->url =  $request->url;
-        $vfx->save();
+
 
 
 

@@ -88,7 +88,6 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/nfc/list','Admin\NfcController@list' );
     Route::post('admin/nfc/card_vfx_add','Admin\NfcController@card_vfx_add' );
     Route::post('admin/nfc/card_vfx_list','Admin\NfcController@card_vfx_list' );
-    Route::post('admin/nfc/card_vfx_edit','Admin\NfcController@card_vfx_edit' );
     Route::post('admin/nfc/card_vfx_del','Admin\NfcController@card_vfx_del' );
     Route::post('admin/nfc/card_vfx_detial','Admin\NfcController@card_vfx_detial' );
 
