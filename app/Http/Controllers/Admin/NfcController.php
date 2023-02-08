@@ -44,13 +44,14 @@ class NfcController extends Controller
 
         $user_id = !empty($request->user_id) ? : 0;
         $mark = !empty($request->mark) ? : '';
+        $vfx_id = !empty($request->vfx_id) ? : '';
 
 
             //更新
             $card->user_id =  $user_id;
             $card->mark =  $mark;
             $card->url =  $request->url;
-            $card->vfx_id =  is_null($request->vfx_id) ?? '';
+            $card->vfx_id =  $vfx_id;
 
             $card->save();
             return $this->success(200, '');
