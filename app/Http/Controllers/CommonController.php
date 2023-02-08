@@ -87,9 +87,11 @@ dd($url1);
 
         $openid = $weixin_user->openid;
 
-        $api_token = md5($openid.rand(1000,9999));
+
         $check = User::where('openid', $openid)->first();
         if (!$check) {
+            $api_token = md5($openid.rand(1000,9999));
+
             $customer = User::create([
                 'name' => $weixin_user->nickname,
                 'password' => $weixin_user->nickname,
@@ -100,13 +102,15 @@ dd($url1);
                 'unionid' => $weixin_user->unionid,
                 'api_token'=> $api_token
             ]);
+            return $this->success(200, ['token' => $api_token]);
         } else {
             $customer = $check;
+            return $this->success(200, ['token' => $check->api_token]);
         }
 
-        Auth::login($customer, true);
 
-        return $this->success(200, ['token' => $api_token]);
+
+
 
 
     }
