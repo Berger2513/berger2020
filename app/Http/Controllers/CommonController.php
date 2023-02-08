@@ -106,7 +106,7 @@ dd($url1);
 
         Auth::login($customer, true);
 
-        return $this->success(200, ['token' => $check->api_token]);
+        return $this->success(200, ['token' => $api_token]);
 
 
     }
@@ -127,7 +127,7 @@ dd($url1);
 
     public function get_user_by_token(Request $request)
     {
-        
+
         $check = User::where('api_token', $request->token)->first();
         if (!$check) {
             $check = [];

@@ -25,7 +25,7 @@ class ImageController extends Controller
             $where[] = ['type','=',$request['type']];
         }
 
-        $res = Image::where($where)->paginate(15);
+        $res = Image::where($where)->orderByDesc('id')->paginate(15);
 
         return $this->success(200,$res);
     }

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Card_vfx;
 use App\Models\Card;
 use App\Models\CardResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class NfcController extends Controller
 {
@@ -70,6 +72,46 @@ class NfcController extends Controller
         } else {
             return $this->err(505, '该卡片没有激活');
         }
+
+    }
+
+
+    public function card_vfx_add(Request $request)
+    {
+        $vfx = new Card_vfx();
+        $vfx->name =  $request->name;
+        $vfx->url =  $request->url;
+        $vfx->save();
+
+
+
+        return $this->success(200, '');
+    }
+
+    public function card_vfx_list(Request $request)
+    {
+
+        return $this->success(200,  Card_vfx::all());
+    }
+
+
+    public function card_vfx_detial(Request $request)
+    {
+
+        return $this->success(200,  Card_vfx::find($request->id));
+    }
+
+    public function card_vfx_edit(Request $request)
+    {
+
+        $vfx =   Card_vfx::find($request->id);
+        $vfx->name =  $request->name;
+        $vfx->url =  $request->url;
+        $vfx->save();
+
+
+
+        return $this->success(200, '');
 
     }
 }

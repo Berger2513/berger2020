@@ -21,7 +21,7 @@ Route::post('/login', 'UserController@login');
 Route::post('/register', 'UserController@register');
 Route::post('/image/del', 'GoodsController@image_del');
 Route::post('/image/add', 'GoodsController@image_add');
-Route::post('/home/index', 'HomeController@index');
+Route::post('/home/index', 'HomeController@index')->name('home');
 Route::post('/home/category', 'HomeController@category');
 Route::post('/home/activity', 'HomeController@activity');
 Route::post('/card/bind', 'HomeController@bind');
@@ -86,6 +86,11 @@ Route::group(['middleware' => ['admin.api']],function () {
 
     Route::post('admin/nfc/wirte_resource','Admin\NfcController@wirte_resource' );
     Route::post('admin/nfc/list','Admin\NfcController@list' );
+    Route::post('admin/nfc/card_vfx_add','Admin\NfcController@card_vfx_add' );
+    Route::post('admin/nfc/card_vfx_list','Admin\NfcController@card_vfx_list' );
+    Route::post('admin/nfc/card_vfx_edit','Admin\NfcController@card_vfx_edit' );
+    Route::post('admin/nfc/card_vfx_del','Admin\NfcController@card_vfx_del' );
+    Route::post('admin/nfc/card_vfx_detial','Admin\NfcController@card_vfx_detial' );
 
 
 });
