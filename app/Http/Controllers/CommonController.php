@@ -93,7 +93,7 @@ dd($url1);
             $customer = User::create([
                 'name' => $weixin_user->nickname,
                 'password' => $weixin_user->nickname,
-                'email' => '',
+                'email' =>  $openid.'@email',
                 'openid' => $openid,
                 'sex' => $weixin_user->sex,
                 'headimgurl' => $weixin_user->headimgurl,
