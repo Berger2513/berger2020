@@ -11,6 +11,8 @@ class Card extends Model
 
     protected $primaryKey = "id";
 
+    protected  $appends  = ['vfx'];
+
     protected $fillable = [
         'uid', 'code',  'user_id', 'mark', 'url','vfx_id','status'
     ];
@@ -22,7 +24,13 @@ class Card extends Model
      *
      * @var array
      */
+    public function getVfxAttribute($value)
+    {
+        $vfx = Card_vfx::find($this->vfx_id);
 
+
+        return $vfx;
+    }
 
 }
 
