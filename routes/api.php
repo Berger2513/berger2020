@@ -32,7 +32,7 @@ Route::post('/card/identity_read', 'HomeController@card_identity_read');
 
 
 //微信回调
-Route::get('/common/weixin_callback', 'CommonController@weixin_callback');
+Route::post('/common/weixin_callback', 'CommonController@weixin_callback');
 Route::get('/common/weixin', 'CommonController@weixin');
 Route::post('common/get_user_by_token', 'CommonController@get_user_by_token');
 
