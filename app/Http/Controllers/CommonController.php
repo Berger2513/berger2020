@@ -87,7 +87,7 @@ dd($url1);
 
         $openid = $weixin_user->openid;
 
-        $api_token = bcrypt($openid.rand(1000,9999));
+        $api_token = md5($openid.rand(1000,9999));
         $check = User::where('openid', $openid)->first();
         if (!$check) {
             $customer = User::create([

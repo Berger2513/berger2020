@@ -42,11 +42,16 @@ class NfcController extends Controller
             return $this->err(505, '卡片不存在');
 
 
+        $user_id = !empty($request->user_id) ? : 0;
+        $mark = !empty($request->mark) ? : '';
+
 
             //更新
-            $card->user_id =  $request->user_id;
-            $card->mark =  $request->mark;
+            $card->user_id =  $user_id;
+            $card->mark =  $mark;
             $card->url =  $request->url;
+            $card->vfx_id =  is_null($request->vfx_id) ?? '';
+
             $card->save();
             return $this->success(200, '');
 
