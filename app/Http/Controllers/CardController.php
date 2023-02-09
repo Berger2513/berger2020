@@ -97,7 +97,7 @@ class CardController extends Controller
         if( !$card = Card::whereUid($request->uid)->first()) return $this->err(505, '卡片不存在');
 
 
-        
+
 
         $reuturn_arr = [
             'status' =>$card->status == 1 ? true : false,
@@ -120,7 +120,7 @@ class CardController extends Controller
         {
             $path = $re->store('users','upyun');
 
-            $pixfix = 'http://bela-goods.test.upcdn.net/';
+            $pixfix = 'https://file.bela-tempo.com/';
             $data = [
                 'path' => $path,
                 'url'  => $pixfix.$path
