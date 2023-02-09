@@ -19,17 +19,24 @@ use App\Events\PodcastProcessed;
 Route::post('/login', 'UserController@login');
 //pc-注册
 Route::post('/register', 'UserController@register');
+
 Route::post('/image/del', 'GoodsController@image_del');
 Route::post('/image/add', 'GoodsController@image_add');
+//pc首页
 Route::post('/home/index', 'HomeController@index')->name('home');
+//pc 分类页面
 Route::post('/home/category', 'HomeController@category');
+// pc 活动页面
 Route::post('/home/activity', 'HomeController@activity');
+
 Route::post('/card/bind', 'HomeController@bind');
 Route::post('/card/card_add', 'HomeController@card_add');
 Route::post('/card/card_detail', 'HomeController@card_detail');
 Route::post('/card/identity', 'HomeController@card_identity');
 Route::post('/card/identity_read', 'HomeController@card_identity_read');
-
+//pc nfc卡片观看和编辑
+Route::post('/card/action', 'CardController@action');
+Route::post('/card/resource_upload', 'CardController@resource_upload');
 
 //微信回调
 Route::post('/common/weixin_callback', 'CommonController@weixin_callback');
@@ -83,14 +90,12 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/page/banner_detail','Admin\PageController@banner_detail' );
     Route::post('admin/page/banner_update','Admin\PageController@banner_update' );
     //    nfc
-
     Route::post('admin/nfc/wirte_resource','Admin\NfcController@wirte_resource' );
     Route::post('admin/nfc/list','Admin\NfcController@list' );
     Route::post('admin/nfc/card_vfx_add','Admin\NfcController@card_vfx_add' );
     Route::post('admin/nfc/card_vfx_list','Admin\NfcController@card_vfx_list' );
     Route::post('admin/nfc/card_vfx_del','Admin\NfcController@card_vfx_del' );
     Route::post('admin/nfc/card_vfx_detial','Admin\NfcController@card_vfx_detial' );
-
 
 });
 
@@ -100,7 +105,6 @@ Route::get('/event_test', function () {
     @PodcastProcessed::dispatch(\App\Models\User::find(1));
     return 'success~';
 });
-
 
 
 Route::group(['middleware' => ['auth.api']], function () {

@@ -119,9 +119,6 @@ class NfcController extends Controller
     {
 
 
-
-
-
         return $this->success(200, '');
 
     }
