@@ -62,6 +62,16 @@ class CardController extends Controller
 
 
     }
+    public function resource_single_upload(Request $request)
+    {
+        if( 'bela_tempo_' !=  $request->code) return $this->err(505, 'code不匹配');
+        $res = $request->file('file');
+        $path = $res->store('users','upyun');
+        $pixfix = 'https://file.bela-tempo.com/';
+        return $this->success(200,$pixfix.$path);
+    }
+
+
 
 
 
@@ -69,8 +79,6 @@ class CardController extends Controller
     {
         if( 'bela_tempo_' !=  $request->code) return $this->err(505, 'code不匹配');
         $res = $request->file('file');
-
-
 //
 //        $rand_int = rand();
 //        $md5_rand_int = md5($rand_int);
@@ -95,6 +103,8 @@ class CardController extends Controller
 
             array_push($reuturn_arr, $path);
         }
+
+        if(count($reuturn_arr) <1 )  return $this->err(505, '上传失败');
 
         return $this->success(200,$reuturn_arr);
     }

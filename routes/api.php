@@ -37,6 +37,7 @@ Route::post('/card/identity_read', 'HomeController@card_identity_read');
 //pc nfc卡片观看和编辑
 Route::post('/card/action', 'CardController@action');
 Route::post('/card/resource_upload', 'CardController@resource_upload');
+Route::post('/card/resource_single_upload', 'CardController@resource_single_upload');
 
 //微信回调
 Route::post('/common/weixin_callback', 'CommonController@weixin_callback');
