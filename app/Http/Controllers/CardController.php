@@ -113,7 +113,7 @@ class CardController extends Controller
     public  function resource_upload(Request $request)
     {
         if( 'bela_tempo_' !=  $request->code) return $this->err(505, 'code不匹配');
-        $res = $request->file('file');
+        $res = $request->file('files');
 //
         $reuturn_arr = [];
         foreach ($res as $re)
