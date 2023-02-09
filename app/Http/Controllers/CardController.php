@@ -6,8 +6,11 @@ use App\Models\Card;
 use App\Models\Card_action;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
+
 class CardController extends Controller
 {
+
     public function action(Request $request)
     {
         //判断uid存在
@@ -89,29 +92,29 @@ class CardController extends Controller
         return $this->success(200,$data);
     }
 
+    public function get_enable_status(Request $request)
+    {
+        if( !$card = Card::whereUid($request->uid)->first()) return $this->err(505, '卡片不存在');
+
+
+        
+
+        $reuturn_arr = [
+            'status' =>$card->status == 1 ? true : false,
+            'vfx_id' =>$card->vfx_id,
+            'url' =>$card->vfx->url,
+        ];
+
+        return $this->success(200,$reuturn_arr);
+    }
 
 
 
-
-    public function resource_upload(Request $request)
+    public  function resource_upload(Request $request)
     {
         if( 'bela_tempo_' !=  $request->code) return $this->err(505, 'code不匹配');
         $res = $request->file('file');
 //
-//        $rand_int = rand();
-//        $md5_rand_int = md5($rand_int);
-//        $rand_extension = rand(0,9999);
-//        $file_extension = $request->file('file')->getClientOriginalExtension();
-//
-////        $path = $request->file('file')->store('file','upyun');
-//        $path = $request->file('file')->storeAs(
-//            'file', $md5_rand_int.$rand_extension.".".$file_extension,'upyun'
-//        );
-//
-//        //$pixfix = 'http://bela-goods.test.upcdn.net/';
-//        return $path;
-
-//        dd($res);
         $reuturn_arr = [];
         foreach ($res as $re)
         {
