@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Models\Card_action;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 class CardController extends Controller
 {
     public function action(Request $request)
@@ -62,13 +62,31 @@ class CardController extends Controller
 
 
     }
+//users/bsqOGWLTtWLfy0EsRE9ODnxFgHsiCKqh3BWfpPoa.mp3
+    //    批量删除图片资源
+    public function  resource_delete(Request $request)
+    {
+        if( 'bela_tempo_' !=  $request->code) return $this->err(505, 'code不匹配');
+        //        初始化又拍云资源
+        $disk = Storage::disk('upyun');
+
+        // 删除单条文件
+        $disk->delete($request->path);
+
+        return $this->success(200,'');
+    }
+
     public function resource_single_upload(Request $request)
     {
         if( 'bela_tempo_' !=  $request->code) return $this->err(505, 'code不匹配');
         $res = $request->file('file');
         $path = $res->store('users','upyun');
         $pixfix = 'https://file.bela-tempo.com/';
-        return $this->success(200,$pixfix.$path);
+        $data = [
+            'path' => $path,
+            'url'  => $pixfix.$path
+        ];
+        return $this->success(200,$data);
     }
 
 
@@ -100,8 +118,11 @@ class CardController extends Controller
             $path = $re->store('users','upyun');
 
             $pixfix = 'http://bela-goods.test.upcdn.net/';
-
-            array_push($reuturn_arr, $path);
+            $data = [
+                'path' => $path,
+                'url'  => $pixfix.$path
+            ];
+            array_push($reuturn_arr, $data);
         }
 
         if(count($reuturn_arr) <1 )  return $this->err(505, '上传失败');

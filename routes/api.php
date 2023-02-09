@@ -38,6 +38,7 @@ Route::post('/card/identity_read', 'HomeController@card_identity_read');
 Route::post('/card/action', 'CardController@action');
 Route::post('/card/resource_upload', 'CardController@resource_upload');
 Route::post('/card/resource_single_upload', 'CardController@resource_single_upload');
+Route::post('/card/resource_delete', 'CardController@resource_delete');
 
 //微信回调
 Route::post('/common/weixin_callback', 'CommonController@weixin_callback');
