@@ -84,6 +84,9 @@ class CardController extends Controller
                 $res->uid       = $request->uid;
                 $res->save();
 
+                $card->status = 1;
+                $card->save();
+
             } else {
                 $card_action->name      = $request->name;
                 $card_action->to_name   = $request->to_name;
@@ -95,6 +98,9 @@ class CardController extends Controller
                 $card_action->uid       = $request->uid;
 
                 $card_action->save();
+
+                $card->status = 1;
+                $card->save();
             }
 
             return $this->success(200, 'ok');

@@ -30,4 +30,11 @@ class Card_action extends Model
 
         return $vfx->vfx_id;
     }
+
+    public function getImagesAttribute($value)
+    {
+
+        $coverList = explode(',',$value);
+        return $coverList;
+    }
 }
