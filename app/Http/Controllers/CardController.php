@@ -11,6 +11,56 @@ use Illuminate\Support\Facades\Storage;
 class CardController extends Controller
 {
 
+    /**
+     * 卡片内容详情
+     * @param equest $request
+     * @return array
+     */
+    public function detail(Request $request)
+    {
+        if( empty($request->uid) ||  !$card = Card::where('uid', $request->uid)->first())
+        {
+            return $this->err(505, '卡片不存在');
+        }
+
+
+        $card_action = Card_action::whereUid($request->uid)->first();
+
+        if(!$card_action)  return $this->err(505, '卡片还没编辑');
+
+
+
+        return $this->success(200, $card_action);
+    }
+
+    /**
+     * 判断用户输入的code有效性
+     * @param equest $request
+     * @return array
+     */
+    public function get_code_status(Request $request)
+    {
+        if( empty($request->uid) ||  !$card = Card::where('uid', $request->uid)->first())
+        {
+            return $this->err(505, '卡片不存在');
+        }
+
+
+        if(!$request->code ||   ( strtoupper($request->code) !== strtoupper($card->code)))
+        {
+            return $this->err(505, 'code不匹配');
+        }
+
+
+
+        return $this->success(200, '');
+    }
+
+    /**、
+     * 用户对于卡片的编辑
+     * @param Request $request
+     * @return array
+     */
     public function action(Request $request)
     {
         //判断uid存在
@@ -19,16 +69,6 @@ class CardController extends Controller
             return $this->err(505, '卡片不存在');
         }
 
-
-
-        if( empty($request->code)) {
-            // 查看卡片的内容
-            $card_action = Card_action::whereUid($request->uid)->first();
-
-            return $this->success(200, $card_action);
-        } else {
-            // 编辑或者新建数据
-            if( strtoupper($request->code) !=  strtoupper($card->code)) return $this->err(505, 'code不匹配');
 
             $card_action = Card_action::whereUid($request->uid)->first();
 
@@ -59,13 +99,7 @@ class CardController extends Controller
 
             return $this->success(200, 'ok');
 
-        }
-
-
-
-
     }
-//users/bsqOGWLTtWLfy0EsRE9ODnxFgHsiCKqh3BWfpPoa.mp3
     //    批量删除图片资源
     public function  resource_delete(Request $request)
     {
@@ -79,6 +113,11 @@ class CardController extends Controller
         return $this->success(200,'');
     }
 
+    /**
+     * 用户上传资源到又拍云
+     * @param Request $request
+     * @return array
+     */
     public function resource_single_upload(Request $request)
     {
         if( 'bela_tempo_' !=  $request->code) return $this->err(505, 'code不匹配');
@@ -92,6 +131,11 @@ class CardController extends Controller
         return $this->success(200,$data);
     }
 
+    /**
+     * 通过卡片的uid判断激活状态
+     * @param Request $request
+     * @return array
+     */
     public function get_enable_status(Request $request)
     {
         if( !$card = Card::whereUid($request->uid)->first()) return $this->err(505, '卡片不存在');
@@ -109,7 +153,11 @@ class CardController extends Controller
     }
 
 
-
+    /**
+     * 用户上传多资源到又拍云
+     * @param Request $request
+     * @return array
+     */
     public  function resource_upload(Request $request)
     {
         if( 'bela_tempo_' !=  $request->code) return $this->err(505, 'code不匹配');

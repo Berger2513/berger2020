@@ -40,6 +40,8 @@ Route::post('/card/resource_upload', 'CardController@resource_upload');
 Route::post('/card/resource_single_upload', 'CardController@resource_single_upload');
 Route::post('/card/resource_delete', 'CardController@resource_delete');
 Route::post('/card/get_enable_status', 'CardController@get_enable_status');
+Route::post('/card/detail', 'CardController@detail');
+Route::post('/card/get_code_status', 'CardController@get_code_status');
 
 //微信回调
 Route::post('/common/weixin_callback', 'CommonController@weixin_callback');
