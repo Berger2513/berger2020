@@ -37,4 +37,11 @@ class Card_action extends Model
         $coverList = explode(',',$value);
         return $coverList;
     }
+
+    public function getTimeAttribute($value)
+    {
+
+
+        return date('Y-m-d',$value);
+    }
 }
