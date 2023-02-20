@@ -28,6 +28,8 @@ Route::post('/home/index', 'HomeController@index')->name('home');
 Route::post('/home/category', 'HomeController@category');
 // pc 活动页面
 Route::post('/home/activity', 'HomeController@activity');
+//得到横幅数据列表
+Route::post('/home/get_banner_list', 'HomeController@get_banner_list');
 
 Route::post('/card/bind', 'HomeController@bind');
 Route::post('/card/card_add', 'HomeController@card_add');
@@ -50,6 +52,7 @@ Route::post('common/get_user_by_token', 'CommonController@get_user_by_token');
 
 //admin端接口
 Route::post('/admin/login', 'Admin\UserController@login');
+Route::post('/admin/login_check', 'Admin\UserController@login_check');
 
 Route::post('admin/nfc/add','Admin\NfcController@add' );
 

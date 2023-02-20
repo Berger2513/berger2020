@@ -8,6 +8,7 @@ use App\Models\CardResource;
 use App\Models\Category;
 use App\Models\Goods;
 use App\Models\Page;
+use App\Models\Banner;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Mockery\Exception;
@@ -199,6 +200,12 @@ class HomeController extends Controller
         $uid = Cache::get('nfc_uid');;
 
         return $this->success(200, $uid);
+    }
+
+    public function  get_banner_list()
+    {
+        $list = Banner::first();
+        return $this->success(200, $list);
     }
 
 }

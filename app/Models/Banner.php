@@ -14,7 +14,7 @@ class Banner extends Model
         'home_url', 'activity_url', 'category_url', 'community_url','shop_url','concat_url'
     ];
     protected $hidden = [
-        'created_at', 'updated_at',
+        'created_at', 'updated_at','id'
     ];
 
 
