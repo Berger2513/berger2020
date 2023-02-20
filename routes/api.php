@@ -28,8 +28,7 @@ Route::post('/home/index', 'HomeController@index')->name('home');
 Route::post('/home/category', 'HomeController@category');
 // pc 活动页面
 Route::post('/home/activity', 'HomeController@activity');
-//得到横幅数据列表
-Route::post('/home/get_banner_list', 'HomeController@get_banner_list');
+
 
 Route::post('/card/bind', 'HomeController@bind');
 Route::post('/card/card_add', 'HomeController@card_add');

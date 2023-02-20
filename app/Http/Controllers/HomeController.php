@@ -40,7 +40,12 @@ class HomeController extends Controller
         $video_modules = $admin_page->video_modules;
         $goods_modules = $admin_page->goods_modules;
 
+        $list = Banner::first();
 
+        $home_banner = '';
+        if(!empty($list)) {
+            $home_banner = $list->home_url;
+        }
 
         foreach ($category_list  as $key => $value)
         {
@@ -91,6 +96,10 @@ class HomeController extends Controller
         $res['topic_modules'] = $topic_modules;
         $res['video_modules'] = $video_modules;
         $res['goods_modules'] = $goods_modules;
+        $res['banner'] = $home_banner;
+
+
+
 
         return $this->success(200, $res);
     }
@@ -104,7 +113,18 @@ class HomeController extends Controller
             $category_list[$key]->goods_list = $goods_list;
         }
 
-        return $this->success(200, $category_list);
+        $list = Banner::first();
+        $category_banner = '';
+        if(!empty($list)) {
+            $category_banner = $list->category_url;
+        }
+
+      $return_arr = [
+          'list' => $category_list,
+          'banner'=>$category_banner
+      ];
+
+        return $this->success(200, $return_arr);
     }
 
 
@@ -114,11 +134,21 @@ class HomeController extends Controller
         $activity_list_2 = Activity::where('is_open', 1)->where('status',2)->get();
         $activity_list_3 = Activity::where('is_open', 1)->where('status',3)->get();
 
+
+        $list = Banner::first();
+        $activity_banner = '';
+        if(!empty($list)) {
+            $activity_banner = $list->activity_url;
+        }
+
+
         $res = [
             'now' => $activity_list_2,
             'future' => $activity_list_1,
             'past' => $activity_list_3,
+            'banner'=>$activity_banner
         ];
+
 
         return $this->success(200, $res);
     }
@@ -200,12 +230,6 @@ class HomeController extends Controller
         $uid = Cache::get('nfc_uid');;
 
         return $this->success(200, $uid);
-    }
-
-    public function  get_banner_list()
-    {
-        $list = Banner::first();
-        return $this->success(200, $list);
     }
 
 }
