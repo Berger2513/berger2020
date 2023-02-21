@@ -29,7 +29,15 @@ Route::post('/home/category', 'HomeController@category');
 // pc 活动页面
 Route::post('/home/activity', 'HomeController@activity');
 
+//专题 page
+Route::post('/topic/detail', 'TopicController@detail');
+/** goods */
+Route::post('/goods/detail', 'GoodsController@detail');
 
+
+/**
+ * 卡片管理
+ */
 Route::post('/card/bind', 'HomeController@bind');
 Route::post('/card/card_add', 'HomeController@card_add');
 Route::post('/card/card_detail', 'HomeController@card_detail');

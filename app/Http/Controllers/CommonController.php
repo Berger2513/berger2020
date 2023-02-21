@@ -16,9 +16,7 @@ class CommonController extends Controller
 
     function __construct()
     {
-//        if(is_empty($this->accessToken)){
-//            $this->accessToken = $this->$this->getAccessToken();
-//        }
+
     }
 
     public function getAccessToken()
@@ -59,8 +57,8 @@ dd($url1);
 
     public function  weixin_callback(Request $request)
     {
-        $APPID = "wx12669591d44f3bc7";
-        $APPSECRET = "8d411f1c83e083018730a39c873a4017";
+        $APPID = env('WEIXIN_KEY');
+        $APPSECRET = env('WEIXIN_SECRET');
 
         $code = $request->code;
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$APPID."&secret=".$APPSECRET."&code=".$code."&grant_type=authorization_code";
@@ -94,8 +92,8 @@ dd($url1);
 
             $customer = User::create([
                 'name' => $weixin_user->nickname,
-                'password' => $weixin_user->nickname,
-                'email' =>  $openid.'@email',
+                'password' =>'',
+                'email' =>  '',
                 'openid' => $openid,
                 'sex' => $weixin_user->sex,
                 'headimgurl' => $weixin_user->headimgurl,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Goods;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 class GoodsController extends Controller
@@ -34,5 +35,16 @@ class GoodsController extends Controller
             array_push($reuturn_arr, $path);
         }
         return $this->success(200,$reuturn_arr);
+    }
+
+    public function detail(Request $request)
+    {
+
+        $goods = Goods::find($request->goods_id);
+
+        if(!$goods) return $this->err(500,'商品不存在');
+
+
+        return $this->success(200,$goods);
     }
 }

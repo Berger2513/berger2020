@@ -91,19 +91,19 @@ class HomeController extends Controller
 
         }
 
-
         $res['category_list'] = $category_list;
         $res['topic_modules'] = $topic_modules;
         $res['video_modules'] = $video_modules;
         $res['goods_modules'] = $goods_modules;
         $res['banner'] = $home_banner;
 
-
-
-
         return $this->success(200, $res);
     }
 
+    /**
+     * 分类页面
+     * @return array
+     */
     public function category()
     {
         $category_list = Category::where(['is_show' =>1])->get();
@@ -127,7 +127,10 @@ class HomeController extends Controller
         return $this->success(200, $return_arr);
     }
 
-
+    /**
+     * 活动页面
+     * @return array
+     */
     public function  activity()
     {
         $activity_list_1 = Activity::where('is_open', 1)->where('status',1)->get();
@@ -154,6 +157,11 @@ class HomeController extends Controller
     }
 
 
+    /**
+     * nfc绑定uid
+     * @param Request $request
+     * @return array
+     */
     public function bind(Request $request)
     {
 
@@ -174,6 +182,11 @@ class HomeController extends Controller
 
     }
 
+    /**
+     * 卡片添加
+     * @param Request $request
+     * @return array
+     */
     public function card_add(Request $request)
     {
         //判断用户合法性
@@ -206,6 +219,12 @@ class HomeController extends Controller
 
 
     }
+
+    /**
+     * 卡片详情
+     * @param Request $request
+     * @return array
+     */
     public function card_detail(Request $request)
     {
         $findExist =  CardResource::whereUid($request->uid)->first();
@@ -216,6 +235,12 @@ class HomeController extends Controller
             return $this->err(505, '该卡片没有激活');
         }
     }
+
+    /**
+     * 卡片验证
+     * @param Request $request
+     * @return array
+     */
     public function card_identity(Request $request)
     {
         $uid = $request->uid ;
@@ -225,6 +250,10 @@ class HomeController extends Controller
         return $this->success(200, '');
     }
 
+    /**
+     * 读卡
+     * @return array
+     */
     public function card_identity_read()
     {
         $uid = Cache::get('nfc_uid');;
