@@ -45,8 +45,11 @@ class TopicController extends Controller
          {
 
              $goods_str = $moudule->goods_id;
-             $goods_list = Goods::whereIn('goods_id',[$goods_str])->get(['goods_id','cover','name']);
+             $goods_arr = explode( ',',$goods_str);
 
+             $goods_list = Goods::whereIn('goods_id',$goods_arr)->get(['goods_id','cover','name']);
+
+             
              $moudules[$k]->goods = $goods_list;
          }
 
