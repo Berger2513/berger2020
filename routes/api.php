@@ -33,6 +33,9 @@ Route::post('/home/activity', 'HomeController@activity');
 Route::post('/topic/detail', 'TopicController@detail');
 /** goods */
 Route::post('/goods/detail', 'GoodsController@detail');
+Route::post('/user/detail', 'UserController@detail');
+Route::post('/user/collect_goods', 'UserController@collect_goods');
+Route::post('/user/cancle_collect_goods', 'UserController@cancle_collect_goods');
 
 
 /**

@@ -11,15 +11,13 @@ class User extends Authenticatable
     use Notifiable;
 
 
-
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','api_token', 'openid','sex','headimgurl','unionid'
+        'name', 'email', 'password', 'api_token', 'openid', 'sex', 'headimgurl', 'unionid', 'password',
     ];
 
     /**
@@ -28,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token', 'created_at', 'updated_at'
     ];
 
     /**
@@ -39,4 +37,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function goods()
+    {
+        return $this->belongsToMany('App\Models\Goods', 'user_goods', 'user_id', 'goods_id');
+
+    }
 }

@@ -45,4 +45,13 @@ class Goods extends Model
     {
         return $this->hasOne(Category::class, 'category_id','category_id');
     }
+
+
+    public function user()
+    {
+        return $this->belongsToMany('User')
+            ->withPivot('id', 'goods_id');
+    }
+
+
 }

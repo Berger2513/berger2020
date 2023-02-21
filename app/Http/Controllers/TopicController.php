@@ -53,7 +53,7 @@ class TopicController extends Controller
 
          $res->modules = json_encode($moudules);
 
-         
+
 
 
          return $this->success(200, $res);
