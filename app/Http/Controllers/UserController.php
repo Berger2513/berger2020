@@ -67,7 +67,28 @@ class UserController extends Controller
 
     public function detail(Request $request)
     {
+        $user = \App\Models\User::find($request->user_id);
+
+
+
+        return $this->success(200,$user);
+
+    }
+    public function detail_goods(Request $request)
+    {
         $user = \App\Models\User::with('goods:goods.goods_id,goods.name,goods.cover')->find($request->user_id);
+
+
+
+        return $this->success(200,$user);
+
+    }
+
+
+
+    public function detail_sale(Request $request)
+    {
+        $user = \App\Models\User::find($request->user_id);
         $user->name_status = true;
         $user->password_status = true;
         $user->openid_status = true;
@@ -81,19 +102,15 @@ class UserController extends Controller
         if(!$user->openid) {
             $user->openid_status = false;
         }
-
-
         return $this->success(200,$user);
-
     }
+
 
 
     public function collect_goods(Request $request)
     {
 
-
             $res = Db::table('user_goods')->where('user_id', $request->user_id)->where('goods_id', $request->goods_id)->first();
-
 
             if(!$res) {
                 Db::table('user_goods')->insert(['user_id'=> $request->user_id , 'goods_id' =>  $request->goods_id]);
@@ -106,9 +123,7 @@ class UserController extends Controller
     public function cancle_collect_goods(Request $request)
     {
 
-
         $res = Db::table('user_goods')->where('user_id', $request->user_id)->where('goods_id', $request->goods_id)->first();
-
 
         if(!$res) {
             return $this->success(200, '');;
