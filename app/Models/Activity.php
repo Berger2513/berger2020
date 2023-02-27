@@ -28,7 +28,7 @@ class Activity extends Model
 
     public function getPrefixAttribute($value)
     {
-        return "https://file.bela-tempo.com//";
+        return "https://file.bela-tempo.com/";
     }
 
 
