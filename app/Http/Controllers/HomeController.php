@@ -157,6 +157,16 @@ class HomeController extends Controller
     }
 
 
+    public function activity_detail(Request $request)
+    {
+        $res = Activity::where('is_open', 1)->where('id', $request->id)->first();
+
+        if(!$res) return $this->err(404, '活动不存在');
+
+        return $this->success(200,$res);
+    }
+
+
     /**
      * nfc绑定uid
      * @param Request $request

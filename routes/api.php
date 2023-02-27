@@ -28,6 +28,7 @@ Route::post('/home/index', 'HomeController@index')->name('home');
 Route::post('/home/category', 'HomeController@category');
 // pc 活动页面
 Route::post('/home/activity', 'HomeController@activity');
+Route::post('/home/activity_detail', 'HomeController@activity_detail');
 
 //专题 page
 Route::post('/topic/detail', 'TopicController@detail');
