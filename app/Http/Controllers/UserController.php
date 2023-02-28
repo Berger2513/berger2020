@@ -69,7 +69,7 @@ class UserController extends Controller
     {
         $user = \App\Models\User::where('api_token',$request->token)->first();
 
-        if(!$user->exexpire_token  || $user->exexpire_token <= time())
+        if(!$user->expire_token  || $user->expire_token <= time())
         {
             return $this->err('409','token已经过期');        }
 
@@ -80,7 +80,7 @@ class UserController extends Controller
     public function detail_goods(Request $request)
     {
         $user = \App\Models\User::with('goods:goods.goods_id,goods.name,goods.cover')->where('api_token',$request->token)->first();
-        if(!$user->exexpire_token  || $user->exexpire_token <= time())
+        if(!$user->expire_token  || $user->expire_token <= time())
         {
             return $this->err('409','token已经过期');
         }
@@ -96,7 +96,7 @@ class UserController extends Controller
     public function detail_sale(Request $request)
     {
         $user = \App\Models\User::where('api_token',$request->token)->first();
-        if(!$user->exexpire_token  || $user->exexpire_token <= time())
+        if(!$user->expire_token  || $user->expire_token <= time())
         {
             return $this->err('409','token已经过期');        }
 
