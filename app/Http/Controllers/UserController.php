@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User as UserModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
+
 class UserController extends Controller
 {
     use AuthenticatesUsers;
@@ -83,6 +85,12 @@ class UserController extends Controller
         if(!$user->expire_token  || $user->expire_token <= time())
         {
             return $this->err('409','token已经过期');
+        }
+
+
+        if($request->filled('name')) {
+
+            $user->name = $request->name;
         }
 
         if($request->filled('headimgurl')) {
@@ -179,5 +187,39 @@ class UserController extends Controller
 
         }
     }
+
+
+    public function user_email_edit(Request $request)
+    {
+        $user =\App\Models\User::where('api_token',$request->token)->first();
+        if(!$user->expire_token  || $user->expire_token <= time())
+        {
+            return $this->err('409','token已经过期');
+        }
+
+        if(\App\Models\User::where('email', $request->email)->first()){
+            return $this->err('409','帐号已经存在');
+        }
+
+        $user->email = $request->email;
+        $user->save();
+        return $this->success(200, '');;
+    }
+    public function user_password_edit(Request $request)
+    {
+        $user =\App\Models\User::where('api_token',$request->token)->first();
+        if(!$user->expire_token  || $user->expire_token <= time())
+        {
+            return $this->err('409','token已经过期');
+        }
+
+
+
+        $user->password =  Crypt::encryptString($request->password);
+        $user->save();
+        return $this->success(200, '');;
+    }
+
+
 
 }

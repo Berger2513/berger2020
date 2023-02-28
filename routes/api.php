@@ -41,6 +41,8 @@ Route::post('/user/detail_goods', 'UserController@detail_goods');
 Route::post('/user/collect_goods', 'UserController@collect_goods');
 Route::post('/user/cancle_collect_goods', 'UserController@cancle_collect_goods');
 Route::post('/user/user_edit', 'UserController@user_edit');
+Route::post('/user/user_email_edit', 'UserController@user_email_edit');
+Route::post('/user/user_password_edit', 'UserController@user_password_edit');
 
 
 /**
