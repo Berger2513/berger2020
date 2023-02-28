@@ -23,19 +23,19 @@ class UserController extends Controller
 
         if($request->user == 'root'){
             $password = 'bela_root_'.$request->password;
-            $token = encrypt($password);
+            $token = md5($password);
 
             Cache::put('admin_root', $token, 60*60*12);
         }
         if($request->user == 'admin'){
             $password = 'bela_admin_'.$request->password;
-            $token = encrypt($password);
+            $token = md5($password);
 
             Cache::put('admin_admin', $token, 60*60*12);
         }
         if($request->user == 'bela_tempo'){
             $password = 'bela_bela_tempo_'.$request->password;
-            $token = encrypt($password);
+            $token = md5($password);
 
             Cache::put('admin_bela_tempo', $token, 60*60*12);
         }
