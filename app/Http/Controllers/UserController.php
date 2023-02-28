@@ -18,20 +18,36 @@ class UserController extends Controller
     public function login(Request $request)
     {
 
-        $credentials = ['email' => $request->email, 'password' => $request->password];
-
-        if (Auth::attempt($credentials)) {
-
-            $user_info = 'user_'.Auth::user()->id.rand(0,1000);
-            $reuslt  = encrypt($user_info);
+//        $credentials = ['email' => $request->name, 'password' => $request->password];
+        $user = \App\Models\User::where('email', $request->name)->first();
 
 
-            UserModel::where('id',Auth::user()->id)->update(['api_token'=> $reuslt]);
-
-            return $this->success(200,$reuslt);
+        if(!$user)
+        {
+            return $this->err(400,['msg'=> '帐号不存在']);
         }
 
-        return $this->err(400,['msg'=> '登录失败']);
+        if(!$user->password)
+        {
+            return $this->err(400,['msg'=> '请先设置密码']);
+        }
+
+        if( Crypt::decryptString($user->password) !=  $request->password) {
+            return $this->err(400,['msg'=> '密码错误']);
+        }
+
+        $api_token = md5($user->openid.rand(1000,9999));//token
+        $expire_token = time()+60*60*12;//过期时间 半天时间
+
+        $user->api_token = $api_token;
+        $user->expire_token = $expire_token;
+        $user->save();
+        return $this->success(200, ['token' => $api_token]);
+
+
+
+
+
 
 
     }

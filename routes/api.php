@@ -15,10 +15,10 @@ use App\Events\PodcastProcessed;
 
 
 
-//pc-登录
-Route::post('/login', 'UserController@login');
-//pc-注册
-Route::post('/register', 'UserController@register');
+////pc-登录
+//Route::post('/login', 'UserController@login');
+////pc-注册
+//Route::post('/register', 'UserController@register');
 
 Route::post('/image/del', 'GoodsController@image_del');
 Route::post('/image/add', 'GoodsController@image_add');
@@ -43,6 +43,7 @@ Route::post('/user/cancle_collect_goods', 'UserController@cancle_collect_goods')
 Route::post('/user/user_edit', 'UserController@user_edit');
 Route::post('/user/user_email_edit', 'UserController@user_email_edit');
 Route::post('/user/user_password_edit', 'UserController@user_password_edit');
+Route::post('/user/login', 'UserController@login');
 
 
 /**
