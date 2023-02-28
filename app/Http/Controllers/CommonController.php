@@ -53,8 +53,12 @@ dd($url1);
     }
 
 
-
-
+    /**
+     * 微信扫码回调
+     * @param Request $request
+     * 通过code 得到access_token 然后再通过这个access_token来拿到微信用户的数据
+     * @return array
+     */
     public function  weixin_callback(Request $request)
     {
         $APPID = env('WEIXIN_KEY');
@@ -88,9 +92,10 @@ dd($url1);
 
         $check = User::where('openid', $openid)->first();
         if (!$check) {
-            $api_token = md5($openid.rand(1000,9999));
+            $api_token = md5($openid.rand(1000,9999));//token
+            $expire_token = time()+60*60*12;//过期时间 半天时间
 
-            $customer = User::create([
+            User::create([
                 'name' => $weixin_user->nickname,
                 'password' =>'',
                 'email' =>  '',
@@ -98,18 +103,25 @@ dd($url1);
                 'sex' => $weixin_user->sex,
                 'headimgurl' => $weixin_user->headimgurl,
                 'unionid' => $weixin_user->unionid,
-                'api_token'=> $api_token
+                'api_token'=> $api_token,
+                'expire_token'=> $expire_token,
             ]);
             return $this->success(200, ['token' => $api_token]);
         } else {
-            $customer = $check;
-            return $this->success(200, ['token' => $check->api_token]);
+           if(!$check->expire_token || $check->expire_token <= time())
+           {
+               $api_token = md5($openid.rand(1000,9999));//token
+               $expire_token = time()+60*60*12;//过期时间 半天时间
+
+               $check->api_token = $api_token;
+               $check->expire_token = $expire_token;
+               $check->save();
+               return $this->success(200, ['token' => $api_token]);
+           } else {
+               return $this->success(200, ['token' => $check->api_token]);
+           }
+
         }
-
-
-
-
-
 
     }
 
@@ -131,8 +143,8 @@ dd($url1);
     {
 
         $check = User::where('api_token', $request->token)->first();
-        if (!$check) {
-            $check = [];
+        if (!$check || $check->expire_token <= time()) {
+            return $this->err(409, 'token不存在或者已经过期');
         }
 
         return $this->success(200, $check);

@@ -67,7 +67,7 @@ class UserController extends Controller
 
     public function detail(Request $request)
     {
-        $user = \App\Models\User::find($request->user_id);
+        $user = \App\Models\User::where('api_token',$request->token)->find();
 
 
 
@@ -76,7 +76,7 @@ class UserController extends Controller
     }
     public function detail_goods(Request $request)
     {
-        $user = \App\Models\User::with('goods:goods.goods_id,goods.name,goods.cover')->find($request->user_id);
+        $user = \App\Models\User::with('goods:goods.goods_id,goods.name,goods.cover')->where('api_token',$request->token)->find();
 
 
 
@@ -88,7 +88,7 @@ class UserController extends Controller
 
     public function detail_sale(Request $request)
     {
-        $user = \App\Models\User::find($request->user_id);
+        $user = \App\Models\User::where('api_token',$request->token)->find();
         $user->name_status = true;
         $user->password_status = true;
         $user->openid_status = true;

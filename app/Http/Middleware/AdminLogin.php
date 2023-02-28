@@ -24,7 +24,9 @@ class AdminLogin
             return response()->json(['code' => 401,'msg' => '请先登录用户']);
         }
 
-        if(!in_array($request->token,[$user_root,$user_admin,$user_bela])){
+        if($user_root !=  $request->token  ||  $request->token  != $user_admin || $request->token  != $user_bela)
+        {
+
             return response()->json(['code' => 499,'msg' => '数据不匹配']);
         }
 
