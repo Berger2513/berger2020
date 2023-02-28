@@ -127,6 +127,24 @@ class HomeController extends Controller
         return $this->success(200, $return_arr);
     }
 
+
+    public function category_detail(Request $request)
+    {
+
+            $goods_list = Goods::where(['category_id' => $request->category_id])->get();
+
+        $list = Banner::first();
+        $category_banner = '';
+        if(!empty($list)) {
+            $category_banner = $list->category_url;
+        }
+        $return_arr = [
+            'list' => $goods_list,
+            'banner'=>$category_banner
+        ];
+
+        return $this->success(200, $return_arr);
+    }
     /**
      * 活动页面
      * @return array

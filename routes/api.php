@@ -26,6 +26,7 @@ Route::post('/image/add', 'GoodsController@image_add');
 Route::post('/home/index', 'HomeController@index')->name('home');
 //pc 分类页面
 Route::post('/home/category', 'HomeController@category');
+Route::post('/home/category_detail', 'HomeController@category_detail');
 // pc 活动页面
 Route::post('/home/activity', 'HomeController@activity');
 Route::post('/home/activity_detail', 'HomeController@activity_detail');
@@ -39,6 +40,7 @@ Route::post('/user/detail_sale', 'UserController@detail_sale');
 Route::post('/user/detail_goods', 'UserController@detail_goods');
 Route::post('/user/collect_goods', 'UserController@collect_goods');
 Route::post('/user/cancle_collect_goods', 'UserController@cancle_collect_goods');
+Route::post('/user/user_edit', 'UserController@user_edit');
 
 
 /**

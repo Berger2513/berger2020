@@ -77,6 +77,43 @@ class UserController extends Controller
         return $this->success(200,$user);
 
     }
+    public function user_edit(Request $request)
+    {
+        $user = \App\Models\User::where('api_token',$request->token)->first();
+        if(!$user->expire_token  || $user->expire_token <= time())
+        {
+            return $this->err('409','token已经过期');
+        }
+
+        if($request->filled('headimgurl')) {
+
+            $user->headimgurl = $request->headimgurl;
+        }
+
+        if($request->filled('sex')) {
+
+            $user->sex = $request->sex;
+        }
+        if($request->filled('contact')) {
+
+            $user->contact = $request->contact;
+        }
+        if($request->filled('job')) {
+
+            $user->job = $request->job;
+        }
+        if($request->filled('signature')) {
+
+            $user->signature = $request->signature;
+        }
+
+        $user->save();
+
+        return $this->success(200,'');
+
+    }
+
+
     public function detail_goods(Request $request)
     {
         $user = \App\Models\User::with('goods:goods.goods_id,goods.name,goods.cover')->where('api_token',$request->token)->first();
@@ -100,19 +137,6 @@ class UserController extends Controller
         {
             return $this->err('409','token已经过期');        }
 
-        $user->name_status = true;
-        $user->password_status = true;
-        $user->openid_status = true;
-
-        if(!$user->email) {
-            $user->name_status = false;
-        }
-        if(!$user->password) {
-            $user->password_status = false;
-        }
-        if(!$user->openid) {
-            $user->openid_status = false;
-        }
         return $this->success(200,$user);
     }
 
