@@ -121,10 +121,16 @@ class UserController extends Controller
     public function collect_goods(Request $request)
     {
 
-            $res = Db::table('user_goods')->where('user_id', $request->user_id)->where('goods_id', $request->goods_id)->first();
+        $user =\App\Models\User::where('api_token',$request->token)->first();
+        if(!$user->expire_token  || $user->expire_token <= time())
+        {
+            return $this->err('409','token已经过期');
+        }
+
+            $res = Db::table('user_goods')->where('user_id', $user->id)->where('goods_id', $request->goods_id)->first();
 
             if(!$res) {
-                Db::table('user_goods')->insert(['user_id'=> $request->user_id , 'goods_id' =>  $request->goods_id]);
+                Db::table('user_goods')->insert(['user_id'=>  $user->id , 'goods_id' =>  $request->goods_id]);
                 return $this->success(200, '');;
             } else {
                 return $this->err(500, '已经收藏了');;
@@ -133,13 +139,18 @@ class UserController extends Controller
 
     public function cancle_collect_goods(Request $request)
     {
+        $user =\App\Models\User::where('api_token',$request->token)->first();
+        if(!$user->expire_token  || $user->expire_token <= time())
+        {
+            return $this->err('409','token已经过期');
+        }
 
-        $res = Db::table('user_goods')->where('user_id', $request->user_id)->where('goods_id', $request->goods_id)->first();
+        $res = Db::table('user_goods')->where('user_id', $user->id)->where('goods_id', $request->goods_id)->first();
 
         if(!$res) {
             return $this->success(200, '');;
         } else {
-            Db::table('user_goods')->where('user_id', $request->user_id)->where('goods_id', $request->goods_id)->delete();
+            Db::table('user_goods')->where('user_id', $user->id)->where('goods_id', $request->goods_id)->delete();
             return $this->success(200, '');;
 
         }
