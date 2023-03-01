@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 
 use Illuminate\Support\Facades\Auth;
@@ -96,7 +95,7 @@ dd($url1);
             $api_token = md5($openid.rand(1000,9999));//token
             $expire_token = time()+60*60*12;//过期时间 半天时间
 
-            DB::table('users')->create([
+            User::create([
                 'name' => $weixin_user->nickname,
                 'password' =>'',
                 'email' =>  '',
