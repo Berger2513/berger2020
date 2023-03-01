@@ -131,7 +131,9 @@ class HomeController extends Controller
     public function category_detail(Request $request)
     {
 
-            $goods_list = Goods::where(['category_id' => $request->category_id])->get();
+        $category = Category::find($request->category_id);
+
+        $goods_list = Goods::where(['category_id' => $request->category_id])->get();
 
         $list = Banner::first();
         $category_banner = '';
@@ -140,7 +142,8 @@ class HomeController extends Controller
         }
         $return_arr = [
             'list' => $goods_list,
-            'banner'=>$category_banner
+            'banner'=>$category_banner,
+            'cate_name'=>$category->name
         ];
 
         return $this->success(200, $return_arr);
