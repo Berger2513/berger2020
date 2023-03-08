@@ -193,7 +193,15 @@ class GoodsController extends Controller
     }
     public function source_list(Request $request)
     {
-        $source =Goods_source::with('category')->paginate(15);
+        $where = [];
+        if ($request->filled('goods_id')) {
+            $where[] = ['goods_id',$request->goods_id];
+        }
+        if ($request->filled('category_id')) {
+            $where[] = ['category_id','=',$request['category_id']];
+        }
+
+        $source =Goods_source::where($where)->with('category')->paginate(15);
 
 
         return $this->success(200,$source);
