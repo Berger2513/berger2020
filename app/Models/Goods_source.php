@@ -13,7 +13,7 @@ class Goods_source extends Model
     protected $primaryKey = "id";
 
     protected $fillable = [
-        'name', 'url', 'price', 'status'
+        'name', 'url', 'price', 'status','shop_name'
     ];
 
     protected $hidden = [
