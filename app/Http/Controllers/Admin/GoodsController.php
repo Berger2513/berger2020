@@ -193,7 +193,7 @@ class GoodsController extends Controller
     }
     public function source_list(Request $request)
     {
-        $source =Goods_source::paginate(15);
+        $source =Goods_source::with('category')->paginate(15);
 
 
         return $this->success(200,$source);
@@ -202,7 +202,7 @@ class GoodsController extends Controller
 
     public function source_detail(Request $request)
     {
-        $source =Goods_source::find($request->id);
+        $source =Goods_source::with('category')->find($request->id);
 
         if(!$source) return $this->err(400,'数据不存在');
 

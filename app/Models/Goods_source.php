@@ -21,6 +21,9 @@ class Goods_source extends Model
     ];
 
 
-
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'category_id','category_id');
+    }
 
 }
