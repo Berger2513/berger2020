@@ -158,6 +158,7 @@ class GoodsController extends Controller
         $source->url = $request->url;
         $source->price = $request->price;
         $source->shop_name = $request->shop_name;
+        $source->category_id = $request->category_id;
 
         $source->save();
         return $this->success(200,'');
@@ -173,7 +174,10 @@ class GoodsController extends Controller
         $source->url = $request->url;
         $source->price = $request->price;
         $source->shop_name = $request->shop_name;
-
+        $source->category_id = $request->category_id;
+        if($request->filled('goods_id')) {
+            $source->goods_id = $request->goods_id;
+        }
         $source->save();
         return $this->success(200,'');
     }
