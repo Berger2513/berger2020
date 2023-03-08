@@ -200,4 +200,15 @@ class GoodsController extends Controller
     }
 
 
+    public function source_detail(Request $request)
+    {
+        $source =Goods_source::find($request->id);
+
+        if(!$source) return $this->err(400,'数据不存在');
+
+
+        return $this->success(200,$source);
+    }
+
+
 }

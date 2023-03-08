@@ -80,6 +80,7 @@ Route::post('admin/goods/source_action','Admin\GoodsController@source_action' );
 Route::post('admin/goods/source_update','Admin\GoodsController@source_update' );
 Route::post('admin/goods/source_del','Admin\GoodsController@source_del' );
 Route::post('admin/goods/source_list','Admin\GoodsController@source_list' );
+Route::post('admin/goods/source_detail','Admin\GoodsController@source_detail' );
 
 Route::group(['middleware' => ['admin.api']],function () {
 
