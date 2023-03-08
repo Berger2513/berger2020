@@ -76,6 +76,11 @@ Route::post('admin/nfc/add','Admin\NfcController@add' );
 
 Route::post('admin/nfc/detail','Admin\NfcController@detail' );
 
+Route::post('admin/goods/source_action','Admin\GoodsController@source_action' );
+Route::post('admin/goods/source_update','Admin\GoodsController@source_update' );
+Route::post('admin/goods/source_del','Admin\GoodsController@source_del' );
+Route::post('admin/goods/source_list','Admin\GoodsController@source_list' );
+
 Route::group(['middleware' => ['admin.api']],function () {
 
     //    资源管理
@@ -97,6 +102,7 @@ Route::group(['middleware' => ['admin.api']],function () {
     Route::post('admin/goods/list','Admin\GoodsController@list' );
     Route::post('admin/goods/detail','Admin\GoodsController@detail' );
     Route::post('admin/goods/show_action','Admin\GoodsController@show_action' );
+
     //    专题管理
     Route::post('admin/topic/add','Admin\TopicController@store' );
     Route::post('admin/topic/del','Admin\TopicController@del' );

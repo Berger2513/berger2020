@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\AdminGoods;
 use App\Http\Requests\AdminGoodsEdit;
 use App\Models\Goods;
+use App\Models\Goods_source;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -147,4 +148,50 @@ class GoodsController extends Controller
 
         return $this->success(200,'');
     }
+
+
+    public function source_action(Request $request)
+    {
+        $source = new Goods_source();
+
+        $source->name = $request->name;
+        $source->url = $request->url;
+        $source->price = $request->price;
+
+        $source->save();
+        return $this->success(200,'');
+    }
+
+    public function source_update(Request $request)
+    {
+        $source =Goods_source::find($request->id);
+
+        if(!$source) return $this->err(400,'数据不存在');
+
+        $source->name = $request->name;
+        $source->url = $request->url;
+        $source->price = $request->price;
+
+        $source->save();
+        return $this->success(200,'');
+    }
+
+    public function source_del(Request $request)
+    {
+        $source =Goods_source::find($request->id);
+
+        if(!$source) return $this->err(400,'数据不存在');
+
+        $source->delete();
+        return $this->success(200,'');
+    }
+    public function source_list(Request $request)
+    {
+        $source =Goods_source::paginate(15);
+
+
+        return $this->success(200,$source);
+    }
+
+
 }

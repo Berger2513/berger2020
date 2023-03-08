@@ -45,11 +45,6 @@ class UserController extends Controller
         return $this->success(200, ['token' => $api_token]);
 
 
-
-
-
-
-
     }
 
 
