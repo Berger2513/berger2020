@@ -200,6 +200,9 @@ class GoodsController extends Controller
         if ($request->filled('category_id')) {
             $where[] = ['category_id','=',$request['category_id']];
         }
+        if ($request->filled('name')) {
+            $where[] = ['name','like','%'.$request['name'].'%'];
+        }
 
         $source =Goods_source::where($where)->with('category')->paginate(15);
 
