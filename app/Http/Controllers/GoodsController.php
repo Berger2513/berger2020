@@ -47,4 +47,10 @@ class GoodsController extends Controller
 
         return $this->success(200,$goods);
     }
+
+    public function get_all_goods(Request $request)
+    {
+        $goods = Goods::orderBy('goods_id', 'desc')->paginate(15);
+        return $this->success(200,$goods);
+    }
 }

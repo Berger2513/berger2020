@@ -35,6 +35,7 @@ Route::post('/home/activity_detail', 'HomeController@activity_detail');
 Route::post('/topic/detail', 'TopicController@detail');
 /** goods */
 Route::post('/goods/detail', 'GoodsController@detail');
+Route::post('/goods/get_all_goods', 'GoodsController@get_all_goods');
 Route::post('/user/detail', 'UserController@detail');
 Route::post('/user/detail_sale', 'UserController@detail_sale');
 Route::post('/user/detail_goods', 'UserController@detail_goods');
